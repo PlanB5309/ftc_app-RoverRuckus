@@ -33,6 +33,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -57,6 +58,14 @@ public class BasicOpMode_Linear extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftDrive = null;
     private DcMotor rightDrive = null;
+    private Servo LeftClaw = null;
+    private Servo RightClaw = null;
+
+    // Lifter servo settings
+    private double leftClawOpen = 0.2;
+    private double leftClawClosed = 0.7;
+    private double rightClawOpen = 1.0;
+    private double rightClawClosed = 0.65;
 
     @Override
     public void runOpMode() {
@@ -69,6 +78,9 @@ public class BasicOpMode_Linear extends LinearOpMode {
         leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
         rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
 
+        LeftClaw = hardwareMap.get(Servo.class, "left_claw");
+        RightClaw = hardwareMap.get(Servo.class, "right_claw");
+
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
         leftDrive.setDirection(DcMotor.Direction.FORWARD);
@@ -80,6 +92,19 @@ public class BasicOpMode_Linear extends LinearOpMode {
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
+
+            if (gamepad1.x == true) {
+                LeftClaw.setPosition(leftClawClosed);
+            }
+            if (gamepad1.y == true) {
+                RightClaw.setPosition(rightClawClosed);
+            }
+            if (gamepad1.a == true) {
+                RightClaw.setPosition(rightClawOpen);
+            }
+            if (gamepad1.b == true) {
+                LeftClaw.setPosition(leftClawOpen);
+            }
 
             // Setup a variable for each drive wheel to save power level for telemetry
             double leftPower;
