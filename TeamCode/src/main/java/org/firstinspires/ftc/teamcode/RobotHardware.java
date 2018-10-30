@@ -65,6 +65,7 @@ public class RobotHardware
     public static final double MID_SERVO       =  0.5 ;
     public static final double ARM_UP_POWER    =  0.45 ;
     public static final double ARM_DOWN_POWER  = -0.45 ;
+    public static final double SWEEPER_POWER = 1;
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;

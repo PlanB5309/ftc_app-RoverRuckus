@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.sun.tools.javac.comp.Lower;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
@@ -19,16 +20,16 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 
 public class myAutonomous extends LinearOpMode {
     RobotHardware         robot   = new RobotHardware(telemetry);
-    LowerRobot lowerRobot = new LowerRobot();
-    ReleaseHook releaseHook = new ReleaseHook();
-    PushGoldBlock pushGoldBlock = new PushGoldBlock();
-    DriveToDepot driveToDepot = new DriveToDepot();
-    DropTeamMarker dropTeamMarker = new DropTeamMarker();
-    DriveToCrater driveToCrater = new DriveToCrater();
+    static LowerRobot lowerRobot = new LowerRobot();
+    static PushGoldBlock pushGoldBlock = new PushGoldBlock();
+    static DriveToDepot driveToDepot = new DriveToDepot();
+    static DropTeamMarker dropTeamMarker = new DropTeamMarker();
+    static DriveToCrater driveToCrater = new DriveToCrater();
 
     public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
         waitForStart();
+        LowerRobot.run();
     }
 
 }
