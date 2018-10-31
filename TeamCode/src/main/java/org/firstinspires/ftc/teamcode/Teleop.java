@@ -11,10 +11,6 @@ public class Teleop extends OpMode {
 
     RobotHardware robot = new RobotHardware(telemetry);
 
-    private double leftClawOpen = 0.2;
-    private double leftClawClosed = 0.7;
-    private double rightClawOpen = 1.0;
-    private double rightClawClosed = 0.65;
 
     public void init () {
         robot.init(hardwareMap);
@@ -31,12 +27,12 @@ public class Teleop extends OpMode {
 
         //Opening and Closing lifter claws with left bumper+trigger
         if (gamepad2.left_bumper) {
-            robot.leftClaw.setPosition(leftClawOpen);
-            robot.rightClaw.setPosition(rightClawOpen);
+            robot.leftClaw.setPosition(robot.LEFT_CLAW_OPEN);
+            robot.rightClaw.setPosition(robot.RIGHT_CLAW_OPEN);
         }
         if (gamepad2.left_trigger > 0.5) {
-            robot.leftClaw.setPosition(leftClawClosed);
-            robot.rightClaw.setPosition(rightClawClosed);
+            robot.leftClaw.setPosition(robot.LEFT_CLAW_CLOSED);
+            robot.rightClaw.setPosition(robot.RIGHT_CLAW_CLOSED);
         }
 
         //Setting lift motor power to arrow pad

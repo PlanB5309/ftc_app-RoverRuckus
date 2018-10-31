@@ -62,10 +62,11 @@ public class RobotHardware
     public DcMotor liftMotor = null;
     public DcMotor sweeperMotor = null;
 
-    public static final double MID_SERVO       =  0.5 ;
-    public static final double ARM_UP_POWER    =  0.45 ;
-    public static final double ARM_DOWN_POWER  = -0.45 ;
     public static final double SWEEPER_POWER = 1;
+    public final double LEFT_CLAW_OPEN = 0.2;
+    public final double LEFT_CLAW_CLOSED = 0.7;
+    public final double RIGHT_CLAW_OPEN = 1.0;
+    public final double RIGHT_CLAW_CLOSED = 0.65;
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
@@ -106,8 +107,8 @@ public class RobotHardware
         // Define and initialize ALL installed servos.
         leftClaw  = hwMap.get(Servo.class, "leftClaw");
         rightClaw = hwMap.get(Servo.class, "rightClaw");
-        leftClaw.setPosition(MID_SERVO);
-        rightClaw.setPosition(MID_SERVO);
+        leftClaw.setPosition(LEFT_CLAW_CLOSED);
+        rightClaw.setPosition(RIGHT_CLAW_CLOSED);
     }
 
 }
