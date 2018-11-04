@@ -57,7 +57,8 @@ public class RobotHardware
     /* Public OpMode members. */
     public DcMotor  leftDrive   = null;
     public DcMotor  rightDrive  = null;
-    public Servo    leftClaw    = null;
+    public Servo leftClaw = null;
+    public Servo    markerServo    = null;
     public Servo    rightClaw   = null;
     public DcMotor liftMotor = null;
     public DcMotor sweeperMotor = null;
