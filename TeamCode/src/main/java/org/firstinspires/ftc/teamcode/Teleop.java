@@ -16,6 +16,9 @@ public class Teleop extends OpMode {
         robot.init(hardwareMap);
     }
     public void loop () {
+        telemetry.addData("lifter motor: ", robot.liftMotor.getCurrentPosition());
+        telemetry.update();
+
 
         //Set driving controls on gamepad 1
         double drive = -gamepad1.left_stick_y;
@@ -27,11 +30,11 @@ public class Teleop extends OpMode {
 
         //Opening and Closing lifter claws with left bumper+trigger
         if (gamepad2.left_bumper) {
-            robot.leftClaw.setPosition(robot.LEFT_CLAW_OPEN);
+//            robot.leftClaw.setPosition(robot.LEFT_CLAW_OPEN);
             robot.rightClaw.setPosition(robot.RIGHT_CLAW_OPEN);
         }
         if (gamepad2.left_trigger > 0.5) {
-            robot.leftClaw.setPosition(robot.LEFT_CLAW_CLOSED);
+//            robot.leftClaw.setPosition(robot.LEFT_CLAW_CLOSED);
             robot.rightClaw.setPosition(robot.RIGHT_CLAW_CLOSED);
         }
 

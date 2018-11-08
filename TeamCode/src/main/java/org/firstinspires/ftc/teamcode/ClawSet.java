@@ -6,11 +6,11 @@ public class ClawSet {
     RobotHardware robot = new RobotHardware(telemetry);
     public ClawSet(){}
     public void open(){
-        robot.leftClaw.setPosition(0);
+//        robot.leftClaw.setPosition(0);
         robot.rightClaw.setPosition(1);
     }
     public void close() {
-        robot.leftClaw.setPosition(0.8);
+//        robot.leftClaw.setPosition(0.8);
         robot.rightClaw.setPosition(0.25);
     }
 }

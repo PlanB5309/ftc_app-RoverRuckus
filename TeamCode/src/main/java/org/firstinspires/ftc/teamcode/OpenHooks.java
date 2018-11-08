@@ -11,7 +11,7 @@ public class OpenHooks {
     }
 
     public void open () throws InterruptedException{
-        robot.leftClaw.setPosition(robot.LEFT_CLAW_OPEN);
+//        robot.leftClaw.setPosition(robot.LEFT_CLAW_OPEN);
         robot.rightClaw.setPosition(robot.RIGHT_CLAW_OPEN);
         Thread.sleep(250);
     }

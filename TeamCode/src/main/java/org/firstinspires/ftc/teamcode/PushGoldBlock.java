@@ -20,12 +20,12 @@ public class PushGoldBlock {
         robot.rightDrive.setPower(0.5);
         robot.leftDrive.setPower(0.5);
 
-        Thread.sleep(2500);
-//        while (robot.rightDrive.isBusy()) {
+        Thread.sleep(2000);
+        while (robot.rightDrive.isBusy()) {
 //            Thread.yield();
             telemetry.addData("right wheel: ", robot.rightDrive.getCurrentPosition());
             telemetry.update();
-//        }
+        }
 
         robot.leftDrive.setPower(0);
         robot.rightDrive.setPower(0);

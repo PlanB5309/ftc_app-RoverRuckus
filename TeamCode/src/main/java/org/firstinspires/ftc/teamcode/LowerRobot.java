@@ -13,15 +13,13 @@ public class LowerRobot {
         this.telemetry = telemetry;
     }
     //static final double COUNTS_PER_MOTOR_REV = 1080;
-    //6 rotations of the motor needed to lift/lower claws, so 6480 clicks/counts
-    //above not far enough, +1000 clicks
-//    static Lift lift = new Lift();
-    public void run(){
+    //    static Lift lift = new Lift();
+    public void run() throws InterruptedException{
 
         robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        int target = 7480;
+        int target = 7700;
         robot.liftMotor.setTargetPosition(target);
         robot.liftMotor.setPower(0.5);
 
@@ -31,5 +29,12 @@ public class LowerRobot {
             telemetry.update();
         }
         robot.liftMotor.setPower(0);
+        Thread.sleep(0250);
+
+        robot.leftDrive.setPower(-0.25);
+        robot.rightDrive.setPower(-0.25);
+        Thread.sleep(0200);
+        robot.leftDrive.setPower(0);
+        robot.rightDrive.setPower(0);
     }
 }

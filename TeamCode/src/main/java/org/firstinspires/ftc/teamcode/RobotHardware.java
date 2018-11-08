@@ -57,17 +57,19 @@ public class RobotHardware
     /* Public OpMode members. */
     public DcMotor  leftDrive   = null;
     public DcMotor  rightDrive  = null;
-    public Servo leftClaw = null;
+//    public Servo leftClaw = null;
     public Servo    markerServo    = null;
     public Servo    rightClaw   = null;
     public DcMotor liftMotor = null;
     public DcMotor sweeperMotor = null;
 
     public static final double SWEEPER_POWER = 1;
-    public final double LEFT_CLAW_OPEN = 0.2;
-    public final double LEFT_CLAW_CLOSED = 0.7;
+//    public final double LEFT_CLAW_OPEN = 0.2;
+//    public final double LEFT_CLAW_CLOSED = 0.7;
     public final double RIGHT_CLAW_OPEN = 1.0;
     public final double RIGHT_CLAW_CLOSED = 0.65;
+    public final double MARKER_CLAW_CLOSED = 0;
+    public final double MARKER_CLAW_OPEN = 1;
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
@@ -89,6 +91,7 @@ public class RobotHardware
         rightDrive = hwMap.get(DcMotor.class, "rightDrive");
         liftMotor    = hwMap.get(DcMotor.class, "liftMotor");
         sweeperMotor    = hwMap.get(DcMotor.class, "sweeperMotor");
+        markerServo = hwMap.get(Servo.class, "markerServo");
         leftDrive.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
         rightDrive.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
 
@@ -106,9 +109,10 @@ public class RobotHardware
         sweeperMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.
-        leftClaw  = hwMap.get(Servo.class, "leftClaw");
+//        leftClaw  = hwMap.get(Servo.class, "leftClaw");
         rightClaw = hwMap.get(Servo.class, "rightClaw");
-        leftClaw.setPosition(LEFT_CLAW_CLOSED);
+        markerServo.setPosition(MARKER_CLAW_CLOSED);
+//        leftClaw.setPosition(LEFT_CLAW_CLOSED);
         rightClaw.setPosition(RIGHT_CLAW_CLOSED);
     }
 

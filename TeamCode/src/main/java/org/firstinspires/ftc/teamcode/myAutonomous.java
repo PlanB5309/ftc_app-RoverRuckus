@@ -20,6 +20,7 @@ public class myAutonomous extends LinearOpMode {
     LowerRobot lowerRobot = new LowerRobot(robot, telemetry);
     OpenHooks openHooks = new OpenHooks(robot, telemetry);
     PushGoldBlock pushGoldBlock = new PushGoldBlock(robot, telemetry);
+    DropTeamMarker dropTeamMarker = new DropTeamMarker(robot, telemetry);
 //    static DriveToDepot driveToDepot = new DriveToDepot();
 //    static DropTeamMarker dropTeamMarker = new DropTeamMarker();
 //    static DriveToCrater driveToCrater = new DriveToCrater();
@@ -30,6 +31,7 @@ public class myAutonomous extends LinearOpMode {
         lowerRobot.run();
         openHooks.open();
         pushGoldBlock.run();
+        dropTeamMarker.drop();
     }
 
 }
