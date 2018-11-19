@@ -74,6 +74,11 @@ public class RobotHardware
     public final double MARKER_CLAW_OPEN = 1;
     public final double JOYSTICK_BLANK_VALUE = 0.05;
     public final int BUCKET_TURN_VALUE = 20;
+    static final double     COUNTS_PER_MOTOR_REV    = 1180 ;
+    static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;
+    static final double     WHEEL_DIAMETER_INCHES   = 3.54 ;
+    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+            (WHEEL_DIAMETER_INCHES * Math.PI);
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
@@ -109,6 +114,8 @@ public class RobotHardware
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
+        leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);

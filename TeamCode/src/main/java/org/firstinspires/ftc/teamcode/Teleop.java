@@ -16,9 +16,11 @@ public class Teleop extends OpMode {
         robot.init(hardwareMap);
     }
     public void loop () {
-        telemetry.addData("lifter motor: ", robot.liftMotor.getCurrentPosition());
-        telemetry.addData("bucket motor: ", robot.bucketMotor.getCurrentPosition());
-        telemetry.addData("arm motor: ", robot.armMotor.getCurrentPosition());
+        telemetry.addData("Lift Motor: ", robot.liftMotor.getCurrentPosition());
+        telemetry.addData("Bucket Motor: ", robot.bucketMotor.getCurrentPosition());
+        telemetry.addData("Arm Motor: ", robot.armMotor.getCurrentPosition());
+        telemetry.addData("Left Drive", robot.leftDrive.getCurrentPosition());
+        telemetry.addData("Right Drive", robot.rightDrive.getCurrentPosition());
         telemetry.update();
 
 
