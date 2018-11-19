@@ -17,6 +17,8 @@ public class Teleop extends OpMode {
     }
     public void loop () {
         telemetry.addData("lifter motor: ", robot.liftMotor.getCurrentPosition());
+        telemetry.addData("bucket motor: ", robot.bucketMotor.getCurrentPosition());
+        telemetry.addData("arm motor: ", robot.armMotor.getCurrentPosition());
         telemetry.update();
 
 
@@ -58,6 +60,34 @@ public class Teleop extends OpMode {
         }
         else {
             robot.sweeperMotor.setPower(0);
+        }
+
+        //Mineral arm controls
+        if (Math.abs(gamepad2.right_stick_y) > robot.JOYSTICK_BLANK_VALUE) {
+                robot.armMotor.setPower(gamepad2.right_stick_y);
+        }
+        else {
+            robot.armMotor.setPower(0);
+        }
+
+        if (Math.abs(gamepad2.left_stick_y) > robot.JOYSTICK_BLANK_VALUE) {
+//            robot.bucketMotor.setPower(gamepad2.left_stick_y);
+            if (gamepad2.left_stick_y > 0) {
+                robot.bucketMotor.setPower(0.1);
+            }
+            else {
+                robot.bucketMotor.setPower(-0.1);
+            }
+        }
+        else {
+            robot.bucketMotor.setPower(0);
+        }
+
+        if (gamepad2.left_stick_button && !robot.bucketMotor.isBusy()) {
+            int bucketPosition = robot.bucketMotor.getCurrentPosition();
+            int targetPosition  = bucketPosition + robot.BUCKET_TURN_VALUE;
+            robot.bucketMotor.setTargetPosition(targetPosition);
+            robot.bucketMotor.setPower(-0.5);
         }
 
     }

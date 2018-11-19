@@ -62,6 +62,8 @@ public class RobotHardware
     public Servo    rightClaw   = null;
     public DcMotor liftMotor = null;
     public DcMotor sweeperMotor = null;
+    public DcMotor armMotor = null;
+    public DcMotor bucketMotor = null;
 
     public static final double SWEEPER_POWER = 1;
 //    public final double LEFT_CLAW_OPEN = 0.2;
@@ -70,6 +72,8 @@ public class RobotHardware
     public final double RIGHT_CLAW_CLOSED = 0.65;
     public final double MARKER_CLAW_CLOSED = 0;
     public final double MARKER_CLAW_OPEN = 1;
+    public final double JOYSTICK_BLANK_VALUE = 0.05;
+    public final int BUCKET_TURN_VALUE = 20;
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
@@ -92,6 +96,8 @@ public class RobotHardware
         liftMotor    = hwMap.get(DcMotor.class, "liftMotor");
         sweeperMotor    = hwMap.get(DcMotor.class, "sweeperMotor");
         markerServo = hwMap.get(Servo.class, "markerServo");
+        armMotor = hwMap.get(DcMotor.class, "armMotor");
+        bucketMotor = hwMap.get(DcMotor.class, "bucketMotor");
         leftDrive.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
         rightDrive.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
 
@@ -107,6 +113,10 @@ public class RobotHardware
         rightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         sweeperMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        bucketMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bucketMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Define and initialize ALL installed servos.
 //        leftClaw  = hwMap.get(Servo.class, "leftClaw");
