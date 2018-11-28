@@ -14,13 +14,14 @@ public class ForwardTest extends LinearOpMode {
     PushGoldBlock pushGoldBlock = new PushGoldBlock(robot, telemetry);
     DropTeamMarker dropTeamMarker = new DropTeamMarker(robot, telemetry);
     Drive drive = new Drive(robot,telemetry);
+    GyroTurn gyroTurn = new GyroTurn(robot,telemetry);
 
 
     public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
         waitForStart();
-        drive.forward(1,36);
-        drive.backward(1,36);
+        gyroTurn.right(90);
+        drive.forward(.5,12);
+        gyroTurn.left(90);
     }
-
 }
