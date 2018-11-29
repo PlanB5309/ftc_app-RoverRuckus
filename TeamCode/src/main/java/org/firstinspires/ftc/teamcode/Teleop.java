@@ -41,8 +41,13 @@ public class Teleop extends OpMode {
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
     }
-    public void loop () {
+
+    //When play is hit
+    public void start () {
         imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
+    }
+
+    public void loop () {
         Orientation angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
 
         telemetry.addData("heading", angles.firstAngle);

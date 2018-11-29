@@ -29,25 +29,28 @@ public class GyroTurn {
     public void right(double degrees) throws InterruptedException{
         robot.leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        updateHeading();
         double target = currHeading-degrees;
         double diff;
         diff = target - currHeading;
         while(Math.abs(diff) > 1){
             diff = target - currHeading;
+            telemetry.addData("diff: ", diff);
             if(diff < 0){
                 if(Math.abs(diff) > 30)
-                    robot.leftDrive.setPower(0.5);
+                    robot.leftDrive.setPower(robot.HIGH_TURN_POWER);
                 else{
-                    robot.leftDrive.setPower(0.1);
+                    robot.leftDrive.setPower(robot.LOW_TURN_POWER);
                 }
             }
             if(diff > 0){
                 if(Math.abs(diff) > 30)
-                    robot.leftDrive.setPower(-0.5);
+                    robot.leftDrive.setPower(-robot.HIGH_TURN_POWER);
                 else{
-                    robot.leftDrive.setPower(-0.1);
+                    robot.leftDrive.setPower(-robot.LOW_TURN_POWER);
                 }
             }
+            updateHeading();
         }
         robot.leftDrive.setPower(0);
     }
@@ -55,26 +58,27 @@ public class GyroTurn {
         robot.rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         updateHeading();
-        double target = currHeading+degrees;
+        double target = currHeading + degrees;
         double diff;
         diff = target - currHeading;
         while(Math.abs(diff) > 1){
-            updateHeading();
             diff = target - currHeading;
+            telemetry.addData("diff:", diff);
             if(diff < 0){
                 if(Math.abs(diff) > 30)
-                    robot.rightDrive.setPower(-0.5);
+                    robot.rightDrive.setPower(-robot.HIGH_TURN_POWER);
                 else{
-                    robot.leftDrive.setPower(-0.1);
+                    robot.leftDrive.setPower(-robot.LOW_TURN_POWER);
                 }
             }
             if(diff > 0){
                 if(Math.abs(diff) > 30)
-                    robot.rightDrive.setPower(0.5);
+                    robot.rightDrive.setPower(robot.HIGH_TURN_POWER);
                 else{
-                    robot.rightDrive.setPower(0.1);
+                    robot.rightDrive.setPower(robot.LOW_TURN_POWER);
                 }
             }
+            updateHeading();
         }
         robot.rightDrive.setPower(0);
     }

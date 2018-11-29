@@ -70,6 +70,8 @@ public class RobotHardware
     public DcMotor bucketMotor = null;
     BNO055IMU imu;
 
+    public final double HIGH_TURN_POWER = 0.3;
+    public final double LOW_TURN_POWER = 0.07;
     public static final double SWEEPER_POWER = 1;
 //    public final double LEFT_CLAW_OPEN = 0.2;
 //    public final double LEFT_CLAW_CLOSED = 0.7;
@@ -134,8 +136,8 @@ public class RobotHardware
         // May want to use RUN_USING_ENCODERS if encoders are installed.
         leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         sweeperMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
