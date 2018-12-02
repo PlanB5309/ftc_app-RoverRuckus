@@ -36,9 +36,13 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
+import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 /**
  * This is NOT an opmode.
@@ -69,7 +73,10 @@ public class RobotHardware
     public DcMotor armMotor = null;
     public DcMotor bucketMotor = null;
     BNO055IMU imu;
-
+    public DcMotor mineralMotor = null;
+    public final int RIGHT = 112;
+    public final int LEFT = 211;
+    public final int CENTER = 121;
     public final double HIGH_TURN_POWER = 0.3;
     public final double LOW_TURN_POWER = 0.07;
     public static final double SWEEPER_POWER = 1;
@@ -86,6 +93,12 @@ public class RobotHardware
     static final double     WHEEL_DIAMETER_INCHES   = 3.54 ;
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * Math.PI);
+    protected static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
+    protected static final String LABEL_GOLD_MINERAL = "Gold Mineral";
+    protected static final String LABEL_SILVER_MINERAL = "Silver Mineral";
+    protected static final String VUFORIA_KEY = "AYboCe//////AAAAGZ74ine8W01csxwSLrlrFU8SCehSLWIwpwUNici0XIz9RK5ZR9rkALDwHUE/860ACZBO2RMrFbWIFC27Ri6dW0fsZH24ckZfYxsXdmBYmch/6XuhsWx75wLnb7+4ZthJQLMZ0wfORFa+6bCn6xDvRGIM+0wqrKZOEv1J+F16mj3MlG4Mx65/DBFc2t8ag9LoVoE2gCcKX+HmeA1aXfAWJVFfp1nhXXUMMyftFe1zaexsXoVbvuCcpyz8aqqZpXBBBuBoRGsxfzuQ6Tq2UlvzzFazzDdFliwmYFdmAQyfae7HORmTHTZs31eVlOB+cJPzciASiUP+KQz7lzRidcSruR3U06PYPv9P1uM9vf4KYwdY";
+    protected VuforiaLocalizer vuforia;
+    protected TFObjectDetector tfod;
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
@@ -122,6 +135,7 @@ public class RobotHardware
         sweeperMotor    = hwMap.get(DcMotor.class, "sweeperMotor");
         markerServo = hwMap.get(Servo.class, "markerServo");
         armMotor = hwMap.get(DcMotor.class, "armMotor");
+        mineralMotor = hwMap.get(DcMotor.class, "mineralMotor");
         bucketMotor = hwMap.get(DcMotor.class, "bucketMotor");
         leftDrive.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
         rightDrive.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
@@ -151,6 +165,20 @@ public class RobotHardware
         markerServo.setPosition(MARKER_CLAW_CLOSED);
 //        leftClaw.setPosition(LEFT_CLAW_CLOSED);
         rightClaw.setPosition(RIGHT_CLAW_CLOSED);
+        VuforiaLocalizer.Parameters param = new VuforiaLocalizer.Parameters();
+
+        param.vuforiaLicenseKey = VUFORIA_KEY;
+        param.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
+
+
+        //  Instantiate the Vuforia engine
+        vuforia = ClassFactory.getInstance().createVuforia(param);
+        int tfodMonitorViewId = hwMap.appContext.getResources().getIdentifier(
+                "tfodMonitorViewId", "id", hwMap.appContext.getPackageName());
+        TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
+        tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
+        tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABEL_GOLD_MINERAL, LABEL_SILVER_MINERAL);
+        tfod.activate();
     }
 
 }

@@ -16,11 +16,12 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 
 
 public class myAutonomous extends LinearOpMode {
-    RobotHardware         robot   = new RobotHardware(telemetry);
+    RobotHardware robot = new RobotHardware(telemetry);
     LowerRobot lowerRobot = new LowerRobot(robot, telemetry);
     OpenHooks openHooks = new OpenHooks(robot, telemetry);
     PushGoldBlock pushGoldBlock = new PushGoldBlock(robot, telemetry);
     DropTeamMarker dropTeamMarker = new DropTeamMarker(robot, telemetry);
+    FindGold findGold = new FindGold(robot,telemetry);
 //    static DriveToDepot driveToDepot = new DriveToDepot();
 //    static DropTeamMarker dropTeamMarker = new DropTeamMarker();
 //    static DriveToCrater driveToCrater = new DriveToCrater();
@@ -30,8 +31,8 @@ public class myAutonomous extends LinearOpMode {
         waitForStart();
         lowerRobot.run();
         openHooks.open();
+        int goldPosition = findGold.run();
         pushGoldBlock.run();
         dropTeamMarker.drop();
     }
-
 }

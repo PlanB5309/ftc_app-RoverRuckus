@@ -102,9 +102,11 @@ public class Teleop extends OpMode {
         //Mineral arm controls
         if (Math.abs(gamepad2.right_stick_y) > robot.JOYSTICK_BLANK_VALUE) {
                 robot.armMotor.setPower(gamepad2.right_stick_y);
+                robot.mineralMotor.setPower(Range.clip(gamepad2.right_stick_y/2,0,0.5));
         }
         else {
             robot.armMotor.setPower(0);
+            robot.mineralMotor.setPower(0);
         }
 
         if (Math.abs(gamepad2.left_stick_y) > robot.JOYSTICK_BLANK_VALUE) {
