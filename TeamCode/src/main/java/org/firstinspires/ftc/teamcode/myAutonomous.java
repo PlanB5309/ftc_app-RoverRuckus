@@ -22,6 +22,7 @@ public class myAutonomous extends LinearOpMode {
     PushGoldBlock pushGoldBlock = new PushGoldBlock(robot, telemetry);
     DropTeamMarker dropTeamMarker = new DropTeamMarker(robot, telemetry);
     FindGold findGold = new FindGold(robot,telemetry);
+    GyroTurn gyroTurn = new GyroTurn(robot, telemetry);
 //    static DriveToDepot driveToDepot = new DriveToDepot();
 //    static DropTeamMarker dropTeamMarker = new DropTeamMarker();
 //    static DriveToCrater driveToCrater = new DriveToCrater();
@@ -31,6 +32,7 @@ public class myAutonomous extends LinearOpMode {
         waitForStart();
         lowerRobot.run();
         openHooks.open();
+        gyroTurn.absolute(0);
         int goldPosition = findGold.run();
         pushGoldBlock.run();
         dropTeamMarker.drop();
