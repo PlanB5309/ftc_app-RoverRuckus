@@ -5,6 +5,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class PushGoldBlock {
     Telemetry telemetry;
     RobotHardware robot = new RobotHardware(telemetry);
+    GyroTurn gyroTurn = new GyroTurn(robot, telemetry);
+    Drive drive = new Drive(robot, telemetry);
 
     public PushGoldBlock(RobotHardware robot, Telemetry telemetry) {
         this.robot = robot;
@@ -12,7 +14,12 @@ public class PushGoldBlock {
     }
 
     public void run(int loc) throws InterruptedException{
-
+        if(loc == robot.LEFT){
+            gyroTurn.left(20);
+        }else if(loc == robot.RIGHT){
+            gyroTurn.right(29);
+        }
+        drive.forward(0.5, 30);
     }
 //    //2240 counts per rotation
 //        robot.sweeperMotor.setPower(-1);
