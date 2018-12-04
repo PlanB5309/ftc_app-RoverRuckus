@@ -86,10 +86,10 @@ public class GyroTurn {
     }
 
     public void absolute(double target) {
-        robot.leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        robot.leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        robot.rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         updateHeading();
         double diff;
         diff = target - currHeading;

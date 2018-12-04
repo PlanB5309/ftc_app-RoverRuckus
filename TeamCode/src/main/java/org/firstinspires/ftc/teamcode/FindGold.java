@@ -41,8 +41,6 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 import java.util.List;
 
-
-@TeleOp(name = "NaviTestMode", group = "test")
 public class FindGold {
     RobotHardware robot;
     Telemetry telemetry;
@@ -53,7 +51,7 @@ public class FindGold {
     }
 
     public int run() {
-        boolean notFound = false;
+        boolean notFound = true;
         while (notFound) {
             List<Recognition> updatedRecognitions = robot.tfod.getUpdatedRecognitions();
             if (updatedRecognitions != null) {

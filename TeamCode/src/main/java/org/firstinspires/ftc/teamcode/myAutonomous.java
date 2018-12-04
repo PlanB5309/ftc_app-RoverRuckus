@@ -23,6 +23,7 @@ public class myAutonomous extends LinearOpMode {
     DropTeamMarker dropTeamMarker = new DropTeamMarker(robot, telemetry);
     FindGold findGold = new FindGold(robot,telemetry);
     GyroTurn gyroTurn = new GyroTurn(robot, telemetry);
+    Drive drive = new Drive(robot, telemetry);
 //    static DriveToDepot driveToDepot = new DriveToDepot();
 //    static DropTeamMarker dropTeamMarker = new DropTeamMarker();
 //    static DriveToCrater driveToCrater = new DriveToCrater();
@@ -30,11 +31,20 @@ public class myAutonomous extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
         waitForStart();
-        lowerRobot.run();
-        openHooks.open();
+//        lowerRobot.run();
+//        openHooks.open();
         gyroTurn.absolute(0);
         int goldPosition = findGold.run();
-        pushGoldBlock.run();
-        dropTeamMarker.drop();
+        pushGoldBlock.run(goldPosition);
+        if(goldPosition == robot.LEFT){
+            gyroTurn.right(45);
+            drive.forward(0.5, 6);
+        }else if(goldPosition == robot.RIGHT){
+            gyroTurn.left(45);
+            drive.forward(0.5, 6);
+        }
+        robot.sweeperMotor.setPower(0.5);
+        Thread.sleep(500);
+        robot.sweeperMotor.setPower(0);
     }
 }

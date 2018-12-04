@@ -5,8 +5,6 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class PushGoldBlock {
     Telemetry telemetry;
     RobotHardware robot = new RobotHardware(telemetry);
-    GyroTurn gyroTurn = new GyroTurn(robot, telemetry);
-    Drive drive = new Drive(robot, telemetry);
 
     public PushGoldBlock(RobotHardware robot, Telemetry telemetry) {
         this.robot = robot;
@@ -14,6 +12,8 @@ public class PushGoldBlock {
     }
 
     public void run(int loc) throws InterruptedException{
+        GyroTurn gyroTurn = new GyroTurn(robot, telemetry);
+        Drive drive = new Drive(robot, telemetry);
         if(loc == robot.LEFT){
             gyroTurn.left(20);
         }else if(loc == robot.RIGHT){

@@ -115,19 +115,6 @@ public class RobotHardware
         // Save reference to Hardware map
         hwMap = ahwMap;
 
-        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
-        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
-        parameters.loggingEnabled      = true;
-        parameters.loggingTag          = "IMU";
-        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-
-        imu = hwMap.get(BNO055IMU.class, "imu");
-        imu.initialize(parameters);
-        Orientation angles;
-        Acceleration gravity;
-
         // Define and Initialize Motors
         leftDrive  = hwMap.get(DcMotor.class, "leftDrive");
         rightDrive = hwMap.get(DcMotor.class, "rightDrive");
@@ -158,6 +145,7 @@ public class RobotHardware
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         bucketMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         bucketMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        mineralMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.
 //        leftClaw  = hwMap.get(Servo.class, "leftClaw");
@@ -165,6 +153,18 @@ public class RobotHardware
         markerServo.setPosition(MARKER_CLAW_CLOSED);
 //        leftClaw.setPosition(LEFT_CLAW_CLOSED);
         rightClaw.setPosition(RIGHT_CLAW_CLOSED);
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+        parameters.loggingEnabled      = true;
+        parameters.loggingTag          = "IMU";
+        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+
+        imu = hwMap.get(BNO055IMU.class, "imu");
+        imu.initialize(parameters);
+        Orientation angles;
+        Acceleration gravity;
         VuforiaLocalizer.Parameters param = new VuforiaLocalizer.Parameters();
 
         param.vuforiaLicenseKey = VUFORIA_KEY;
@@ -179,6 +179,8 @@ public class RobotHardware
         tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
         tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABEL_GOLD_MINERAL, LABEL_SILVER_MINERAL);
         tfod.activate();
+        telemetry.addData("Initialization Complete: ", "Yay");
+        telemetry.update();
     }
 
 }
