@@ -83,7 +83,7 @@ public class RobotHardware
 //    public final double LEFT_CLAW_OPEN = 0.2;
 //    public final double LEFT_CLAW_CLOSED = 0.7;
     public final double RIGHT_CLAW_OPEN = 1.0;
-    public final double RIGHT_CLAW_CLOSED = 0.65;
+    public final double RIGHT_CLAW_CLOSED = 0.7;
     public final double MARKER_CLAW_CLOSED = 0;
     public final double MARKER_CLAW_OPEN = 1;
     public final double JOYSTICK_BLANK_VALUE = 0.05;
