@@ -56,7 +56,7 @@ public class FindGold {
             List<Recognition> updatedRecognitions = robot.tfod.getUpdatedRecognitions();
             if (updatedRecognitions != null) {
                 telemetry.addData("# Object Detected", updatedRecognitions.size());
-                if (updatedRecognitions.size() == 3) {
+                if (updatedRecognitions.size() == 2) {
                     int goldMineralX = -1;
                     int silverMineral1X = -1;
                     int silverMineral2X = -1;
@@ -69,18 +69,33 @@ public class FindGold {
                             silverMineral2X = (int) recognition.getLeft();
                         }
                     }
-                    if (goldMineralX != -1 && silverMineral1X != -1 && silverMineral2X != -1) {
-                        if (goldMineralX < silverMineral1X && goldMineralX < silverMineral2X) {
+                    if(goldMineralX != -1){
+                        if(silverMineral1X < goldMineralX){
                             telemetry.addData("Gold Mineral Position", "Left");
                             return robot.LEFT;
-                        } else if (goldMineralX > silverMineral1X && goldMineralX > silverMineral2X) {
-                            telemetry.addData("Gold Mineral Position", "Right");
-                            return robot.RIGHT;
-                        } else {
+                        }
+                        else{
                             telemetry.addData("Gold Mineral Position", "Center");
                             return robot.CENTER;
                         }
                     }
+                    else{
+                        telemetry.addData("Gold Mineral Position", "Right");
+                        return robot.RIGHT;
+                    }
+
+//                    if (goldMineralX != -1 && silverMineral1X != -1 && silverMineral2X != -1) {
+//                        if (goldMineralX < silverMineral1X && goldMineralX < silverMineral2X) {
+//                            telemetry.addData("Gold Mineral Position", "Left");
+//                            return robot.LEFT;
+//                        } else if (goldMineralX > silverMineral1X && goldMineralX > silverMineral2X) {
+//                            telemetry.addData("Gold Mineral Position", "Right");
+//                            return robot.RIGHT;
+//                        } else {
+//                            telemetry.addData("Gold Mineral Position", "Center");
+//                            return robot.CENTER;
+//                        }
+//                    }
                 }
                 telemetry.update();
             }
