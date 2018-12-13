@@ -83,6 +83,7 @@ public class RobotHardware
 //    public final double LEFT_CLAW_OPEN = 0.2;
 //    public final double LEFT_CLAW_CLOSED = 0.7;
     public final double RIGHT_CLAW_OPEN = 1.0;
+    public final double BUCKET_ARM_RATIO = -0.037;
     public final double RIGHT_CLAW_CLOSED = 0.7;
     public final double MARKER_CLAW_CLOSED = 0;
     public final double MARKER_CLAW_OPEN = 1;

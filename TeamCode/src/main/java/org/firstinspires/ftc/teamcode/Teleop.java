@@ -99,18 +99,28 @@ public class Teleop extends OpMode {
             robot.sweeperMotor.setPower(0);
         }
 
-        //Mineral arm controls
-        if (Math.abs(gamepad2.right_stick_y) > robot.JOYSTICK_BLANK_VALUE) {
-                robot.armMotor.setPower(gamepad2.right_stick_y);
-                robot.mineralMotor.setPower(Range.clip(gamepad2.right_stick_y/2,0,0.5));
+        //Mineral arm lift controls
+        if (gamepad2.right_trigger > 0.5 || gamepad2.right_bumper) {
+            if (gamepad2.right_trigger > 0.5) {
+                robot.mineralMotor.setPower(0.5);
+            } else if (gamepad2.right_bumper) {
+                robot.mineralMotor.setPower(-0.5);
+            }
         }
         else {
-            robot.armMotor.setPower(0);
             robot.mineralMotor.setPower(0);
         }
 
+        //Mineral arm motor
+        if (Math.abs(gamepad2.right_stick_y) > robot.JOYSTICK_BLANK_VALUE) {
+                robot.armMotor.setPower(gamepad2.right_stick_y);
+        }
+        else {
+            robot.armMotor.setPower(0);
+        }
+
+        //Bucket motor controls
         if (Math.abs(gamepad2.left_stick_y) > robot.JOYSTICK_BLANK_VALUE) {
-//            robot.bucketMotor.setPower(gamepad2.left_stick_y);
             if (gamepad2.left_stick_y > 0) {
                 robot.bucketMotor.setPower(0.1);
             }
