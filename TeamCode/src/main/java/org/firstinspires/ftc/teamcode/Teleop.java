@@ -52,7 +52,7 @@ public class Teleop extends OpMode {
 
         telemetry.addData("heading", angles.firstAngle);
         telemetry.addData("Lift Motor: ", robot.liftMotor.getCurrentPosition());
-        telemetry.addData("Bucket Motor: ", robot.bucketMotor.getCurrentPosition());
+        telemetry.addData("Bucket Servo: ", robot.bucketServo.getPosition());
         telemetry.addData("Arm Motor: ", robot.armMotor.getCurrentPosition());
         telemetry.addData("Left Drive", robot.leftDrive.getCurrentPosition());
         telemetry.addData("Right Drive", robot.rightDrive.getCurrentPosition());
@@ -69,11 +69,9 @@ public class Teleop extends OpMode {
 
         //Opening and Closing lifter claws with left bumper+trigger
         if (gamepad2.left_bumper) {
-//            robot.leftClaw.setPosition(robot.LEFT_CLAW_OPEN);
             robot.rightClaw.setPosition(robot.RIGHT_CLAW_OPEN);
         }
         if (gamepad2.left_trigger > 0.5) {
-//            robot.leftClaw.setPosition(robot.LEFT_CLAW_CLOSED);
             robot.rightClaw.setPosition(robot.RIGHT_CLAW_CLOSED);
         }
 
@@ -88,7 +86,7 @@ public class Teleop extends OpMode {
             robot.liftMotor.setPower(0);
         }
 
-        //Setting the mineral sweeper motor settings
+        //Setting the sweeper motor settings
         if (gamepad2.a) {
             robot.sweeperMotor.setPower(1);
         }
@@ -99,10 +97,10 @@ public class Teleop extends OpMode {
             robot.sweeperMotor.setPower(0);
         }
 
-        //Mineral arm lift controls
+        //Mineral lift motor controls
         if (gamepad2.right_trigger > 0.5 || gamepad2.right_bumper) {
             if (gamepad2.right_trigger > 0.5) {
-                robot.mineralMotor.setPower(0.5);
+                robot.mineralMotor.setPower(1); //Up?
             } else if (gamepad2.right_bumper) {
                 robot.mineralMotor.setPower(-0.5);
             }
@@ -119,24 +117,23 @@ public class Teleop extends OpMode {
             robot.armMotor.setPower(0);
         }
 
-        //Bucket motor controls
+        //Bucket servo controls
         if (Math.abs(gamepad2.left_stick_y) > robot.JOYSTICK_BLANK_VALUE) {
             if (gamepad2.left_stick_y > 0) {
-                robot.bucketMotor.setPower(0.1);
+                robot.bucketServo.setPosition(robot.bucketServo.getPosition() - robot.BUCKET_TURN_VALUE);
             }
             else {
-                robot.bucketMotor.setPower(-0.1);
+                robot.bucketServo.setPosition(robot.bucketServo.getPosition() + robot.BUCKET_TURN_VALUE);
             }
         }
-        else {
-            robot.bucketMotor.setPower(0);
+        else if (gamepad2.x) {
+            robot.bucketServo.setPosition(robot.BUCKET_CARRY_POSITION);
         }
-
-        if (gamepad2.left_stick_button && !robot.bucketMotor.isBusy()) {
-            int bucketPosition = robot.bucketMotor.getCurrentPosition();
-            int targetPosition  = bucketPosition + robot.BUCKET_TURN_VALUE;
-            robot.bucketMotor.setTargetPosition(targetPosition);
-            robot.bucketMotor.setPower(-0.5);
+        else if (gamepad2.b) {
+            robot.bucketServo.setPosition(robot.BUCKET_SCOOP_POSITION);
+        }
+        else if (gamepad2.left_stick_button /*&& !robot.bucketServo.isBusy()*/) {
+            robot.bucketServo.setPosition(robot.bucketServo.getPosition() + robot.BUCKET_TURN_VALUE);
         }
 
     }

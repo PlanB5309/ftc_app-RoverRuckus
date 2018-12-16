@@ -65,9 +65,9 @@ public class RobotHardware
     /* Public OpMode members. */
     public DcMotor  leftDrive   = null;
     public DcMotor  rightDrive  = null;
-//    public Servo leftClaw = null;
     public Servo    markerServo    = null;
     public Servo    rightClaw   = null;
+    public Servo bucketServo = null;
     public DcMotor liftMotor = null;
     public DcMotor sweeperMotor = null;
     public DcMotor armMotor = null;
@@ -88,7 +88,9 @@ public class RobotHardware
     public final double MARKER_CLAW_CLOSED = 0;
     public final double MARKER_CLAW_OPEN = 1;
     public final double JOYSTICK_BLANK_VALUE = 0.05;
-    public final int BUCKET_TURN_VALUE = 20;
+    public final double BUCKET_TURN_VALUE = 0.15;
+    public final double BUCKET_SCOOP_POSITION = 0.64;
+    public final double BUCKET_CARRY_POSITION = 0.4;
     static final double     COUNTS_PER_MOTOR_REV    = 1180 ;
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;
     static final double     WHEEL_DIAMETER_INCHES   = 3.54 ;
@@ -121,7 +123,6 @@ public class RobotHardware
         rightDrive = hwMap.get(DcMotor.class, "rightDrive");
         liftMotor    = hwMap.get(DcMotor.class, "liftMotor");
         sweeperMotor    = hwMap.get(DcMotor.class, "sweeperMotor");
-        markerServo = hwMap.get(Servo.class, "markerServo");
         armMotor = hwMap.get(DcMotor.class, "armMotor");
         mineralMotor = hwMap.get(DcMotor.class, "mineralMotor");
         bucketMotor = hwMap.get(DcMotor.class, "bucketMotor");
@@ -149,10 +150,10 @@ public class RobotHardware
         mineralMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.
-//        leftClaw  = hwMap.get(Servo.class, "leftClaw");
+        markerServo = hwMap.get(Servo.class, "markerServo");
+        bucketServo = hwMap.get(Servo.class, "bucketServo");
         rightClaw = hwMap.get(Servo.class, "rightClaw");
         markerServo.setPosition(MARKER_CLAW_CLOSED);
-//        leftClaw.setPosition(LEFT_CLAW_CLOSED);
         rightClaw.setPosition(RIGHT_CLAW_CLOSED);
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
