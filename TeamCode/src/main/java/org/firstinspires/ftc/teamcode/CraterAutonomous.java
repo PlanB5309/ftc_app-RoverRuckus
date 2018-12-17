@@ -33,6 +33,8 @@ public class CraterAutonomous extends LinearOpMode {
         openHooks.open();
         gyroTurn.absolute(0);
         goldPosition = findGold.run();
+        telemetry.addData("GOld Position: ", goldPosition);
+        telemetry.update();
         pushGoldBlock.run(goldPosition);
         if (goldPosition == robot.LEFT) {
             gyroTurn.right(45);

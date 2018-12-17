@@ -111,7 +111,7 @@ public class Teleop extends OpMode {
 
         //Mineral arm motor
         if (Math.abs(gamepad2.right_stick_y) > robot.JOYSTICK_BLANK_VALUE) {
-                robot.armMotor.setPower(gamepad2.right_stick_y);
+                robot.armMotor.setPower(gamepad2.right_stick_y / 2);
         }
         else {
             robot.armMotor.setPower(0);
@@ -119,12 +119,13 @@ public class Teleop extends OpMode {
 
         //Bucket servo controls
         if (Math.abs(gamepad2.left_stick_y) > robot.JOYSTICK_BLANK_VALUE) {
-            if (gamepad2.left_stick_y > 0) {
-                robot.bucketServo.setPosition(robot.bucketServo.getPosition() - robot.BUCKET_TURN_VALUE);
-            }
-            else {
-                robot.bucketServo.setPosition(robot.bucketServo.getPosition() + robot.BUCKET_TURN_VALUE);
-            }
+            robot.bucketServo.setPosition(robot.bucketServo.getPosition() + (robot.BUCKET_TURN_VALUE * gamepad2.left_stick_y));
+//            if (gamepad2.left_stick_y > 0) {
+//                robot.bucketServo.setPosition(robot.bucketServo.getPosition() - robot.BUCKET_TURN_VALUE);
+//            }
+//            else {
+//                robot.bucketServo.setPosition(robot.bucketServo.getPosition() + robot.BUCKET_TURN_VALUE);
+//            }
         }
         else if (gamepad2.x) {
             robot.bucketServo.setPosition(robot.BUCKET_CARRY_POSITION);
@@ -133,7 +134,7 @@ public class Teleop extends OpMode {
             robot.bucketServo.setPosition(robot.BUCKET_SCOOP_POSITION);
         }
         else if (gamepad2.left_stick_button /*&& !robot.bucketServo.isBusy()*/) {
-            robot.bucketServo.setPosition(robot.bucketServo.getPosition() + robot.BUCKET_TURN_VALUE);
+            robot.bucketServo.setPosition(robot.BUCKET_DUMP_POSITION);
         }
 
     }

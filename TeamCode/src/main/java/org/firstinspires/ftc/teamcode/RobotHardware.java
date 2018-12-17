@@ -88,9 +88,10 @@ public class RobotHardware
     public final double MARKER_CLAW_CLOSED = 0;
     public final double MARKER_CLAW_OPEN = 1;
     public final double JOYSTICK_BLANK_VALUE = 0.05;
-    public final double BUCKET_TURN_VALUE = 0.15;
-    public final double BUCKET_SCOOP_POSITION = 0.64;
-    public final double BUCKET_CARRY_POSITION = 0.4;
+    public final double BUCKET_TURN_VALUE = 0.05;
+    public final double BUCKET_SCOOP_POSITION = 0;
+    public final double BUCKET_CARRY_POSITION = 0.15;
+    public final double BUCKET_DUMP_POSITION = 0.85;
     static final double     COUNTS_PER_MOTOR_REV    = 1180 ;
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;
     static final double     WHEEL_DIAMETER_INCHES   = 3.54 ;
