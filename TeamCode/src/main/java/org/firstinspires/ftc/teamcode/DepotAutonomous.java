@@ -11,11 +11,11 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 
-@Autonomous(name="My Autonomous", group="Auto")
+@Autonomous(name="Depot Autonomous", group="Auto")
 
 
 
-public class myAutonomous extends LinearOpMode {
+public class DepotAutonomous extends LinearOpMode {
     RobotHardware robot = new RobotHardware(telemetry);
     LowerRobot lowerRobot = new LowerRobot(robot, telemetry);
     OpenHooks openHooks = new OpenHooks(robot, telemetry);
@@ -35,16 +35,19 @@ public class myAutonomous extends LinearOpMode {
 //        openHooks.open();
         gyroTurn.absolute(0);
         int goldPosition = findGold.run();
+        telemetry.addData("Gold position: ", goldPosition);
+        telemetry.update();
+        robot.bucketServo.setPosition(robot.BUCKET_DUMP_POSITION);
         pushGoldBlock.run(goldPosition);
         if(goldPosition == robot.LEFT){
             gyroTurn.right(45);
             drive.forward(0.5, 6);
         }else if(goldPosition == robot.RIGHT){
-            gyroTurn.left(45);
-            drive.forward(0.5, 6);
+            gyroTurn.left(65);
+            drive.forward(0.5, 12);
         }
-        robot.sweeperMotor.setPower(0.5);
-        Thread.sleep(500);
-        robot.sweeperMotor.setPower(0);
+        else{
+            drive.forward(0.5,12);
+        }
     }
 }

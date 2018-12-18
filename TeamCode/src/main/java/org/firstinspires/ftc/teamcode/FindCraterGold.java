@@ -29,23 +29,16 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
-import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
-import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
-import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 import java.util.List;
 
-public class FindGold {
+public class FindCraterGold {
     RobotHardware robot;
     Telemetry telemetry;
 
-    public FindGold(RobotHardware robot, Telemetry telemetry) {
+    public FindCraterGold(RobotHardware robot, Telemetry telemetry) {
         this.robot = robot;
         this.telemetry = telemetry;
     }
@@ -70,7 +63,7 @@ public class FindGold {
                         }
                     }
                     if(goldMineralX != -1){
-                        if(silverMineral1X < goldMineralX){
+                        if(silverMineral1X > goldMineralX){
                             telemetry.addData("Gold Mineral Position", "Center");
                             return robot.CENTER;
                         }
