@@ -43,9 +43,9 @@ public class Teleop extends OpMode {
     }
 
     //When play is hit
-    public void start () {
-        imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
-    }
+//    public void start () {
+//        imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
+//    }
 
     public void loop () {
         Orientation angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
@@ -98,9 +98,9 @@ public class Teleop extends OpMode {
         }
 
         //Mineral lift motor controls
-        if (gamepad2.right_trigger > 0.5 || gamepad2.right_bumper) {
+        if (gamepad2.right_trigger > 0.5 || gamepad2.right_bumper) { //Negative power - going up
             if (gamepad2.right_trigger > 0.5) {
-                robot.mineralMotor.setPower(1); //Up?
+                robot.mineralMotor.setPower(1);
             } else if (gamepad2.right_bumper) {
                 robot.mineralMotor.setPower(-0.5);
             }
