@@ -29,17 +29,23 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import android.support.annotation.NonNull;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class FindGold {
     RobotHardware robot;
@@ -56,33 +62,85 @@ public class FindGold {
             List<Recognition> updatedRecognitions = robot.tfod.getUpdatedRecognitions();
             if (updatedRecognitions != null) {
                 telemetry.addData("# Object Detected", updatedRecognitions.size());
-                if (updatedRecognitions.size() == 2) {
-                    int goldMineralX = -1;
-                    int silverMineral1X = -1;
-                    int silverMineral2X = -1;
-                    for (Recognition recognition : updatedRecognitions) {
-                        if (recognition.getLabel().equals(robot.LABEL_GOLD_MINERAL)) {
-                            goldMineralX = (int) recognition.getLeft();
-                        } else if (silverMineral1X == -1) {
-                            silverMineral1X = (int) recognition.getLeft();
-                        } else {
-                            silverMineral2X = (int) recognition.getLeft();
-                        }
-                    }
-                    if(goldMineralX != -1){
-                        if(silverMineral1X < goldMineralX){
-                            telemetry.addData("Gold Mineral Position", "Center");
-                            return robot.CENTER;
-                        }
-                        else{
-                            telemetry.addData("Gold Mineral Position", "Left");
-                            return robot.LEFT;
-                        }
-                    }
-                    else{
-                        telemetry.addData("Gold Mineral Position", "Right");
-                        return robot.RIGHT;
-                    }
+            }
+
+//            Recognition recOne;
+//            Recognition recTwo;
+//            if(updatedRecognitions.get(1).getBottom() > updatedRecognitions.get(0).getBottom()) {
+//                recOne = updatedRecognitions.get(0);
+//                recTwo = updatedRecognitions.get(1);
+//            }
+//            else {
+//                recOne = updatedRecognitions.get(1);
+//                recTwo = updatedRecognitions.get(0);
+//            }
+            Recognition lowest = updatedRecognitions.get(0);
+            for (Recognition recognition : updatedRecognitions) {
+                if(lowest.equals(recognition)){
+                }
+                else if(recognition.getBottom() < lowest.getBottom())
+                    lowest = recognition;
+            }
+            updatedRecognitions.remove(lowest);
+            Recognition secondLowest = updatedRecognitions.get(0);
+            for (Recognition recognition : updatedRecognitions) {
+                if(secondLowest.equals(recognition)){
+                }
+                else if(recognition.getBottom() < secondLowest.getBottom())
+                    secondLowest = recognition;
+            }
+
+            if(lowest.getLeft() < secondLowest.getLeft()){
+                if(lowest.getLabel().equals(robot.LABEL_GOLD_MINERAL)){
+                    telemetry.addData("Gold Mineral Position", "Left");
+                    return robot.LEFT;
+                }
+                else if(secondLowest.getLabel().equals(robot.LABEL_GOLD_MINERAL)){
+                    telemetry.addData("Gold Mineral Position", "Center");
+                    return robot.CENTER;
+                }
+                else{
+                    telemetry.addData("Gold Mineral Position", "Right");
+                    return robot.RIGHT;
+                }
+            }
+            else{
+                if(secondLowest.getLabel().equals(robot.LABEL_GOLD_MINERAL)){
+                    telemetry.addData("Gold Mineral Position", "Left");
+                    return robot.LEFT;
+                }
+                else if(lowest.getLabel().equals(robot.LABEL_GOLD_MINERAL)){
+                    telemetry.addData("Gold Mineral Position", "Center");
+                    return robot.CENTER;
+                }
+                else{
+                    telemetry.addData("Gold Mineral Position", "Right");
+                    return robot.RIGHT;
+                }
+            }
+
+//            if (recognition.getConfidence() > robot.TENSORFLOW_SENSETIVITY) {
+//                if (recognition.getLabel().equals(robot.LABEL_GOLD_MINERAL)) {
+//                    goldMineralX = (int) recognition.getLeft();
+//                } else if (silverMineral1X == -1) {
+//                    silverMineral1X = (int) recognition.getLeft();
+//                }
+//            }
+
+//            if (goldMineralX != -1) {
+//                if (silverMineral1X < goldMineralX) {
+//                    telemetry.addData("Gold Mineral Position", "Center");
+//                    return robot.CENTER;
+//                } else {
+//                    telemetry.addData("Gold Mineral Position", "Left");
+//                    return robot.LEFT;
+//                }
+//            } else {
+//                telemetry.addData("Gold Mineral Position", "Right");
+//                return robot.RIGHT;
+//            }
+
+
 
 //                    if (goldMineralX != -1 && silverMineral1X != -1 && silverMineral2X != -1) {
 //                        if (goldMineralX < silverMineral1X && goldMineralX < silverMineral2X) {
@@ -96,10 +154,8 @@ public class FindGold {
 //                            return robot.CENTER;
 //                        }
 //                    }
-                }
-                telemetry.update();
-            }
         }
+        telemetry.update();
         return robot.CENTER;
     }
 }

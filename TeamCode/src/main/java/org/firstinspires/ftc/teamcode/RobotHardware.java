@@ -82,6 +82,7 @@ public class RobotHardware
     public static final double SWEEPER_POWER = 1;
 //    public final double LEFT_CLAW_OPEN = 0.2;
 //    public final double LEFT_CLAW_CLOSED = 0.7;
+    public final double TENSORFLOW_SENSETIVITY = 0.9;
     public final double RIGHT_CLAW_OPEN = 1.0;
     public final double BUCKET_ARM_RATIO = -0.037;
     public final double RIGHT_CLAW_CLOSED = 0.7;
@@ -181,6 +182,7 @@ public class RobotHardware
                 "tfodMonitorViewId", "id", hwMap.appContext.getPackageName());
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
         tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
+        tfodParameters.minimumConfidence = TENSORFLOW_SENSETIVITY;
         tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABEL_GOLD_MINERAL, LABEL_SILVER_MINERAL);
         tfod.activate();
         telemetry.addData("Initialization Complete: ", "Yay");
