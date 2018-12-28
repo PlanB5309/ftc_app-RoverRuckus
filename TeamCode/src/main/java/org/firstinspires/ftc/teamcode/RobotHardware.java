@@ -188,6 +188,51 @@ public class RobotHardware
         telemetry.addData("Initialization Complete: ", "Yay");
         telemetry.update();
     }
+    public void initTeleop(HardwareMap ahwMap) {
+        // Save reference to Hardware map
+        hwMap = ahwMap;
+
+        // Define and Initialize Motors
+        leftDrive  = hwMap.get(DcMotor.class, "leftDrive");
+        rightDrive = hwMap.get(DcMotor.class, "rightDrive");
+        liftMotor    = hwMap.get(DcMotor.class, "liftMotor");
+        sweeperMotor    = hwMap.get(DcMotor.class, "sweeperMotor");
+        armMotor = hwMap.get(DcMotor.class, "armMotor");
+        mineralMotor = hwMap.get(DcMotor.class, "mineralMotor");
+        bucketMotor = hwMap.get(DcMotor.class, "bucketMotor");
+        leftDrive.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
+        rightDrive.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
+
+        // Set all motors to zero power
+        leftDrive.setPower(0);
+        rightDrive.setPower(0);
+        liftMotor.setPower(0);
+        sweeperMotor.setPower(0);
+
+        // Set all motors to run without encoders.
+        // May want to use RUN_USING_ENCODERS if encoders are installed.
+        leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        sweeperMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        bucketMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bucketMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        mineralMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        // Define and initialize ALL installed servos.
+        markerServo = hwMap.get(Servo.class, "markerServo");
+        bucketServo = hwMap.get(Servo.class, "bucketServo");
+        rightClaw = hwMap.get(Servo.class, "rightClaw");
+        markerServo.setPosition(MARKER_CLAW_CLOSED);
+        rightClaw.setPosition(RIGHT_CLAW_CLOSED);
+        bucketServo.setPosition(BUCKET_DUMP_POSITION);
+        telemetry.addData("Initialization Complete: ", "Yay");
+        telemetry.update();
+    }
 
 }
 

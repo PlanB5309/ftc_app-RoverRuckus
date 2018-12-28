@@ -15,11 +15,11 @@ public class PushGoldBlock {
         GyroTurn gyroTurn = new GyroTurn(robot, telemetry);
         Drive drive = new Drive(robot, telemetry);
         if(loc == robot.LEFT){
-            gyroTurn.left(20);
+            gyroTurn.left(25);
         }else if(loc == robot.RIGHT){
             gyroTurn.right(29);
         }
-        robot.sweeperMotor.setPower(0.5);
+        robot.sweeperMotor.setPower(-0.5);
         drive.forward(0.5, 30);
         robot.sweeperMotor.setPower(0);
     }

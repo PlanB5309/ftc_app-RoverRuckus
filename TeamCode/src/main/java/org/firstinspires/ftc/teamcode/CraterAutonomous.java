@@ -33,8 +33,7 @@ public class CraterAutonomous extends LinearOpMode {
 //        openHooks.open();
 //        gyroTurn.absolute(0);
         goldPosition = findGold.run();
-        telemetry.addData("Gold Position: ", robot.CENTER);
-        telemetry.update();
+
 
         robot.mineralMotor.setPower(-0.75);
         sleep(750);
@@ -54,6 +53,6 @@ public class CraterAutonomous extends LinearOpMode {
             drive.forward(0.25, 2);
         }
         drive.forward(0.25, 6);
-//        dropTeamMarker.drop();
+        dropTeamMarker.drop();
     }
 }

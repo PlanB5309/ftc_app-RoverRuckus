@@ -38,15 +38,28 @@ public class DepotAutonomous extends LinearOpMode {
         telemetry.addData("Gold position: ", goldPosition);
         telemetry.update();
         robot.bucketServo.setPosition(robot.BUCKET_DUMP_POSITION);
-        pushGoldBlock.run(goldPosition);
+        //pushGoldBlock.run(goldPosition);
         if(goldPosition == robot.LEFT){
-            gyroTurn.right(45);
+            gyroTurn.left(25);
+            robot.sweeperMotor.setPower(-0.5);
+            drive.forward(0.5, 33);
+            gyroTurn.right(55);
             drive.forward(0.5, 6);
+            robot.sweeperMotor.setPower(0);
+            gyroTurn.right(18);
+            drive.backward(0.5, 56);
         }else if(goldPosition == robot.RIGHT){
+            gyroTurn.right(29);
+            robot.sweeperMotor.setPower(-0.5);
+            drive.forward(0.5, 30);
+            robot.sweeperMotor.setPower(0);
             gyroTurn.left(65);
             drive.forward(0.5, 12);
         }
         else{
+            robot.sweeperMotor.setPower(-0.5);
+            drive.forward(0.5, 30);
+            robot.sweeperMotor.setPower(0);
             drive.forward(0.5,12);
         }
     }

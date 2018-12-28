@@ -22,7 +22,7 @@ public class Teleop extends OpMode {
     BNO055IMU imu;
 
     public void init () {
-        robot.init(hardwareMap);
+        robot.initTeleop(hardwareMap);
 
         // Set up the parameters with which we will use our IMU. Note that integration
         // algorithm here just reports accelerations to the logcat log; it doesn't actually
