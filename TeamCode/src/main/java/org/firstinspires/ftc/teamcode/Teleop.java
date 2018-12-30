@@ -102,7 +102,7 @@ public class Teleop extends OpMode {
             if (gamepad2.right_trigger > 0.5) {
                 robot.mineralMotor.setPower(1);
             } else if (gamepad2.right_bumper) {
-                robot.mineralMotor.setPower(-0.5);
+                robot.mineralMotor.setPower(-1);
             }
         }
         else {
