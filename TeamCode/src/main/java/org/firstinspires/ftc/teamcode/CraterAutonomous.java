@@ -21,24 +21,29 @@ public class CraterAutonomous extends LinearOpMode {
     FindGold findGold = new FindGold(robot,telemetry);
     GyroTurn gyroTurn = new GyroTurn(robot, telemetry);
     Drive drive = new Drive(robot, telemetry);
-
+    RaiseMineralLift raiseMineralLift = new RaiseMineralLift(robot, telemetry);
 
     public void runOpMode() throws InterruptedException {
         int goldPosition;
 
         robot.init(hardwareMap);
         waitForStart();
-//        lowerRobot.run();
-//        drive.backward(0.25, 1);
-//        openHooks.open();
-//        gyroTurn.absolute(0);
+
+        lowerRobot.run();
+        openHooks.open();
+        gyroTurn.absolute(0);
+        robot.liftMotor.setTargetPosition(0);
+        robot.liftMotor.setPower(0.5);
+        while (robot.liftMotor.isBusy()) {
+            Thread.yield();
+        }
+        robot.liftMotor.setPower(0);
+
         goldPosition = findGold.run();
+        telemetry.addData("Gold Position: ", goldPosition);
+        telemetry.update();
 
-
-        robot.mineralMotor.setPower(-0.75);
-        sleep(750);
-        robot.mineralMotor.setPower(0);
-
+        raiseMineralLift.setHalfway();
         robot.sweeperMotor.setPower(-1);
         pushGoldBlock.run(goldPosition);
         robot.sweeperMotor.setPower(0);
@@ -53,6 +58,8 @@ public class CraterAutonomous extends LinearOpMode {
             drive.forward(0.25, 2);
         }
         drive.forward(0.25, 6);
-        dropTeamMarker.drop();
+//        dropTeamMarker.drop();
+
+        raiseMineralLift.setDown();
     }
 }

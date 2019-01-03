@@ -19,7 +19,7 @@ public class LowerRobot {
         robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        int target = 7700;
+        int target = 8500;
         robot.liftMotor.setTargetPosition(target);
         robot.liftMotor.setPower(0.5);
 
@@ -31,8 +31,8 @@ public class LowerRobot {
         robot.liftMotor.setPower(0);
         Thread.sleep(0250);
 
-        robot.leftDrive.setPower(-0.25);
-        robot.rightDrive.setPower(-0.25);
+//        robot.leftDrive.setPower(-0.25);
+//        robot.rightDrive.setPower(-0.25);
         Thread.sleep(0200);
         robot.leftDrive.setPower(0);
         robot.rightDrive.setPower(0);

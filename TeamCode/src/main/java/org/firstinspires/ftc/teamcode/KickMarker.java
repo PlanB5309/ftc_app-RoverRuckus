@@ -15,10 +15,12 @@ public class KickMarker {
 
     public void run() throws  InterruptedException{
         Drive drive = new Drive(robot, telemetry);
-        robot.mineralMotor.setPower(0.5);
+//        robot.mineralMotor.setPower(0.5);
+//        Thread.sleep(500);
+//        robot.mineralMotor.setPower(0);
+        robot.mineralMotor.setTargetPosition(-1618);
         Thread.sleep(500);
-        robot.mineralMotor.setPower(0);
-        robot.bucketServo.setPosition(0.5);
+        robot.bucketServo.setPosition(0.58);
         robot.sweeperMotor.setPower(-0.5);
         drive.backward(0.5, 3);
         robot.sweeperMotor.setPower(0);

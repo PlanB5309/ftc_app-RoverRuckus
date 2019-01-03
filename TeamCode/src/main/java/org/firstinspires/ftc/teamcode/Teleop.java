@@ -56,6 +56,7 @@ public class Teleop extends OpMode {
         telemetry.addData("Arm Motor: ", robot.armMotor.getCurrentPosition());
         telemetry.addData("Left Drive", robot.leftDrive.getCurrentPosition());
         telemetry.addData("Right Drive", robot.rightDrive.getCurrentPosition());
+        telemetry.addData("Mineral Lift:", robot.mineralMotor.getCurrentPosition());
         telemetry.update();
 
 
@@ -98,9 +99,9 @@ public class Teleop extends OpMode {
         }
 
         //Mineral lift motor controls
-        if (gamepad2.right_trigger > 0.5 || gamepad2.right_bumper) { //Negative power - going up
+        if (gamepad2.right_trigger > 0.5 || gamepad2.right_bumper) { //Bumper - going up
             if (gamepad2.right_trigger > 0.5) {
-                robot.mineralMotor.setPower(1);
+                robot.mineralMotor.setPower(0.5);
             } else if (gamepad2.right_bumper) {
                 robot.mineralMotor.setPower(-1);
             }
@@ -112,6 +113,7 @@ public class Teleop extends OpMode {
         //Mineral arm motor
         if (Math.abs(gamepad2.right_stick_y) > robot.JOYSTICK_BLANK_VALUE) {
                 robot.armMotor.setPower(gamepad2.right_stick_y / 2);
+                robot.bucketServo.setPosition(robot.armMotor.getCurrentPosition() * -0.0002433);
         }
         else {
             robot.armMotor.setPower(0);

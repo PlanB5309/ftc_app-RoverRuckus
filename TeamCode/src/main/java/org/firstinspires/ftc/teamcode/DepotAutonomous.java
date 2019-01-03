@@ -24,6 +24,7 @@ public class DepotAutonomous extends LinearOpMode {
     GyroTurn gyroTurn = new GyroTurn(robot, telemetry);
     Drive drive = new Drive(robot, telemetry);
     KickMarker kickMarker = new KickMarker(robot,telemetry);
+    RaiseMineralLift raiseMineralLift = new RaiseMineralLift(robot, telemetry);
 //    static DriveToDepot driveToDepot = new DriveToDepot();
 //    static DropTeamMarker dropTeamMarker = new DropTeamMarker();
 //    static DriveToCrater driveToCrater = new DriveToCrater();
@@ -33,6 +34,7 @@ public class DepotAutonomous extends LinearOpMode {
         waitForStart();
 //        lowerRobot.run();
 //        openHooks.open();
+        raiseMineralLift.setHalfway();
         gyroTurn.absolute(0);
         int goldPosition = findGold.run();
         telemetry.addData("Gold position: ", goldPosition);
@@ -46,7 +48,7 @@ public class DepotAutonomous extends LinearOpMode {
             gyroTurn.right(55);
             drive.forward(0.5, 6);
             robot.sweeperMotor.setPower(0);
-            kickMarker.run();
+//            kickMarker.run();
             gyroTurn.right(18);
             drive.backward(0.5, 56);
         } else if (goldPosition == robot.RIGHT) {
@@ -56,13 +58,14 @@ public class DepotAutonomous extends LinearOpMode {
             robot.sweeperMotor.setPower(0);
             gyroTurn.left(65);
             drive.forward(0.5, 12);
-            kickMarker.run();
+//            kickMarker.run();
         } else {
             robot.sweeperMotor.setPower(-0.5);
             drive.forward(0.5, 30);
             robot.sweeperMotor.setPower(0);
             drive.forward(0.5, 12);
-            kickMarker.run();
+//            kickMarker.run();
         }
+        raiseMineralLift.setDown();
     }
 }
