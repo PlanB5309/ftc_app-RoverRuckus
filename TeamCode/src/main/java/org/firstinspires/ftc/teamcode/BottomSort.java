@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 public class BottomSort implements Comparator<Recognition> {
     public int compare(Recognition a, Recognition b){
-        return(int)( a.getBottom() - b.getBottom());
+        return(int)( b.getBottom() - a.getBottom());
     }
 
 }
