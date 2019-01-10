@@ -17,28 +17,20 @@ public class RaiseMineralLift {
         robot.mineralMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.mineralMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        int target = 8500;
+        int target = -500;
         robot.mineralMotor.setTargetPosition(target);
         robot.mineralMotor.setPower(0.5);
-        while (robot.liftMotor.isBusy()) {
-            telemetry.addData("lift clicks", robot.liftMotor.getCurrentPosition());
-            telemetry.update();
-        }
-        robot.liftMotor.setPower(0);
     }
 
     public void setDown() {
-        robot.mineralMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.mineralMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
         int target = 0;
-                robot.mineralMotor.setTargetPosition(target);
+        robot.mineralMotor.setTargetPosition(target);
         robot.mineralMotor.setPower(0.5);
-        while (robot.liftMotor.isBusy()) {
+        while (robot.mineralMotor.isBusy()) {
             Thread.yield();
-            telemetry.addData("lift clicks", robot.liftMotor.getCurrentPosition());
+            telemetry.addData("mineral lift clicks", robot.mineralMotor.getCurrentPosition());
             telemetry.update();
         }
-        robot.liftMotor.setPower(0);
+        robot.mineralMotor.setPower(0);
     }
 }
