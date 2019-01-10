@@ -186,6 +186,7 @@ public class RobotHardware
         tfodParameters.minimumConfidence = TENSORFLOW_SENSETIVITY;
         tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABEL_GOLD_MINERAL, LABEL_SILVER_MINERAL);
         tfod.activate();
+        telemetry.addData("Encoder Value: ", mineralMotor.getCurrentPosition());
         telemetry.addData("Initialization Complete: ", "Yay");
         telemetry.update();
     }

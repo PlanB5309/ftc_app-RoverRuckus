@@ -1,15 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.sun.tools.javac.comp.Lower;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 @Autonomous(name="Crater Autonomous", group="Auto")
 
 public class CraterAutonomous extends LinearOpMode {
@@ -17,11 +11,10 @@ public class CraterAutonomous extends LinearOpMode {
     LowerRobot lowerRobot = new LowerRobot(robot, telemetry);
     OpenHooks openHooks = new OpenHooks(robot, telemetry);
     PushGoldBlock pushGoldBlock = new PushGoldBlock(robot, telemetry);
-    DropTeamMarker dropTeamMarker = new DropTeamMarker(robot, telemetry);
     FindGold findGold = new FindGold(robot,telemetry);
     GyroTurn gyroTurn = new GyroTurn(robot, telemetry);
     Drive drive = new Drive(robot, telemetry);
-    RaiseMineralLift raiseMineralLift = new RaiseMineralLift(robot, telemetry);
+    MineralLift mineralLift = new MineralLift(robot, telemetry);
 
     public void runOpMode() throws InterruptedException {
         int goldPosition;
@@ -30,7 +23,7 @@ public class CraterAutonomous extends LinearOpMode {
         waitForStart();
 
         lowerRobot.run();
-        raiseMineralLift.setHalfway();
+        mineralLift.setHalfway();
         openHooks.open();
         gyroTurn.absolute(0);
         robot.liftMotor.setTargetPosition(100);
@@ -44,23 +37,9 @@ public class CraterAutonomous extends LinearOpMode {
         telemetry.addData("Gold Position: ", goldPosition);
         telemetry.update();
 
-        raiseMineralLift.setHalfway();
-        robot.sweeperMotor.setPower(-1);
+        mineralLift.setHalfway();
         pushGoldBlock.run(goldPosition);
-        robot.sweeperMotor.setPower(0);
-
-        if (goldPosition == robot.LEFT) {
-            gyroTurn.right(45);
+        while(isStopRequested() == false){
         }
-        else if (goldPosition == robot.RIGHT) {
-            gyroTurn.left(25);
-        }
-        else { //Position = center
-            drive.forward(0.25, 2);
-        }
-        drive.forward(0.25, 6);
-//        dropTeamMarker.drop();
-
-        raiseMineralLift.setDown();
     }
 }

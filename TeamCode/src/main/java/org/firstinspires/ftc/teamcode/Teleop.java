@@ -19,27 +19,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 public class Teleop extends OpMode {
 
     RobotHardware robot = new RobotHardware(telemetry);
-    BNO055IMU imu;
 
     public void init () {
         robot.initTeleop(hardwareMap);
-
-        // Set up the parameters with which we will use our IMU. Note that integration
-        // algorithm here just reports accelerations to the logcat log; it doesn't actually
-        // provide positional information.
-        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
-        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
-        parameters.loggingEnabled      = true;
-        parameters.loggingTag          = "IMU";
-        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-
-        // Retrieve and initialize the IMU. We expect the IMU to be attached to an I2C port
-        // on a Core Device Interface Module, configured to be a sensor of type "AdaFruit IMU",
-        // and named "imu".
-        imu = hardwareMap.get(BNO055IMU.class, "imu");
-        imu.initialize(parameters);
     }
 
     //When play is hit
@@ -48,9 +30,7 @@ public class Teleop extends OpMode {
 //    }
 
     public void loop () {
-        Orientation angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
 
-        telemetry.addData("heading", angles.firstAngle);
         telemetry.addData("Lift Motor: ", robot.liftMotor.getCurrentPosition());
         telemetry.addData("Bucket Servo: ", robot.bucketServo.getPosition());
         telemetry.addData("Arm Motor: ", robot.armMotor.getCurrentPosition());
@@ -101,7 +81,7 @@ public class Teleop extends OpMode {
         //Mineral lift motor controls
         if (gamepad2.right_trigger > 0.5 || gamepad2.right_bumper) { //Bumper - going up
             if (gamepad2.right_trigger > 0.5) {
-                robot.mineralMotor.setPower(0.5);
+                robot.mineralMotor.setPower(1);
             } else if (gamepad2.right_bumper) {
                 robot.mineralMotor.setPower(-1);
             }

@@ -1,15 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.sun.tools.javac.comp.Lower;
-
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 
 @Autonomous(name = "Depot Autonomous", group = "Auto")
 
@@ -18,13 +11,11 @@ public class DepotAutonomous extends LinearOpMode {
     RobotHardware robot = new RobotHardware(telemetry);
     LowerRobot lowerRobot = new LowerRobot(robot, telemetry);
     OpenHooks openHooks = new OpenHooks(robot, telemetry);
-    PushGoldBlock pushGoldBlock = new PushGoldBlock(robot, telemetry);
-    DropTeamMarker dropTeamMarker = new DropTeamMarker(robot, telemetry);
     FindGold findGold = new FindGold(robot, telemetry);
     GyroTurn gyroTurn = new GyroTurn(robot, telemetry);
     Drive drive = new Drive(robot, telemetry);
     KickMarker kickMarker = new KickMarker(robot,telemetry);
-    RaiseMineralLift raiseMineralLift = new RaiseMineralLift(robot, telemetry);
+    MineralLift mineralLift = new MineralLift(robot, telemetry);
 //    static DriveToDepot driveToDepot = new DriveToDepot();
 //    static DropTeamMarker dropTeamMarker = new DropTeamMarker();
 //    static DriveToCrater driveToCrater = new DriveToCrater();
@@ -32,7 +23,9 @@ public class DepotAutonomous extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
         waitForStart();
-        raiseMineralLift.setHalfway();
+        mineralLift.setHalfway();
+        telemetry.addData("Encoder Value: ", robot.mineralMotor.getCurrentPosition());
+        telemetry.update();
         lowerRobot.run();
         openHooks.open();
         gyroTurn.absolute(0);
@@ -42,13 +35,13 @@ public class DepotAutonomous extends LinearOpMode {
         robot.bucketServo.setPosition(robot.BUCKET_DUMP_POSITION);
         //pushGoldBlock.run(goldPosition);
         if (goldPosition == robot.LEFT) {
-            gyroTurn.left(25);
+            gyroTurn.left(20);
             robot.sweeperMotor.setPower(-0.5);
             drive.forward(0.5, 33);
             gyroTurn.right(55);
-            drive.forward(0.5, 6);
+            drive.forward(0.5, 12);
             robot.sweeperMotor.setPower(0);
-            kickMarker.run();
+            robot.bucketServo.setPosition(0.58);
 //            gyroTurn.right(18);
 //            drive.backward(0.5, 56);
         } else if (goldPosition == robot.RIGHT) {
@@ -57,15 +50,17 @@ public class DepotAutonomous extends LinearOpMode {
             drive.forward(0.5, 30);
             robot.sweeperMotor.setPower(0);
             gyroTurn.left(65);
-            drive.forward(0.5, 12);
-            kickMarker.run();
+            drive.forward(0.5, 18);
+            robot.bucketServo.setPosition(0.58);
         } else {
             robot.sweeperMotor.setPower(-0.5);
             drive.forward(0.5, 30);
             robot.sweeperMotor.setPower(0);
-            drive.forward(0.5, 16);
-            kickMarker.run();
+            drive.forward(0.5, 22);
+            robot.bucketServo.setPosition(0.58);
         }
-        raiseMineralLift.setDown();
+        while(isStopRequested() == false){
+
+        }
     }
 }
