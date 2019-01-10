@@ -25,6 +25,7 @@ public class LowerRobot {
 
         while (robot.liftMotor.isBusy()) {
             telemetry.addData("lift clicks", robot.liftMotor.getCurrentPosition());
+            telemetry.addData("mineral lift clicks", robot.mineralMotor.getCurrentPosition());
             telemetry.update();
         }
         robot.liftMotor.setPower(0);

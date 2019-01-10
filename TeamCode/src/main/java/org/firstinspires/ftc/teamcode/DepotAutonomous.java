@@ -32,9 +32,9 @@ public class DepotAutonomous extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
         waitForStart();
-//        lowerRobot.run();
-//        openHooks.open();
         raiseMineralLift.setHalfway();
+        lowerRobot.run();
+        openHooks.open();
         gyroTurn.absolute(0);
         int goldPosition = findGold.run();
         telemetry.addData("Gold position: ", goldPosition);
@@ -48,9 +48,9 @@ public class DepotAutonomous extends LinearOpMode {
             gyroTurn.right(55);
             drive.forward(0.5, 6);
             robot.sweeperMotor.setPower(0);
-//            kickMarker.run();
-            gyroTurn.right(18);
-            drive.backward(0.5, 56);
+            kickMarker.run();
+//            gyroTurn.right(18);
+//            drive.backward(0.5, 56);
         } else if (goldPosition == robot.RIGHT) {
             gyroTurn.right(29);
             robot.sweeperMotor.setPower(-0.5);
@@ -58,13 +58,13 @@ public class DepotAutonomous extends LinearOpMode {
             robot.sweeperMotor.setPower(0);
             gyroTurn.left(65);
             drive.forward(0.5, 12);
-//            kickMarker.run();
+            kickMarker.run();
         } else {
             robot.sweeperMotor.setPower(-0.5);
             drive.forward(0.5, 30);
             robot.sweeperMotor.setPower(0);
-            drive.forward(0.5, 12);
-//            kickMarker.run();
+            drive.forward(0.5, 16);
+            kickMarker.run();
         }
         raiseMineralLift.setDown();
     }

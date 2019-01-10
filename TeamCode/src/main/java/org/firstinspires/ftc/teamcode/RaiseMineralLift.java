@@ -14,10 +14,7 @@ public class RaiseMineralLift {
     }
 
     public void setHalfway() {
-        robot.mineralMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.mineralMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        int target = -500;
+        int target = -150;
         robot.mineralMotor.setTargetPosition(target);
         robot.mineralMotor.setPower(0.5);
     }

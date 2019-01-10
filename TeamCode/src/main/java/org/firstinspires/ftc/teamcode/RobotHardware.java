@@ -149,7 +149,8 @@ public class RobotHardware
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         bucketMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         bucketMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        mineralMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        mineralMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        mineralMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         // Define and initialize ALL installed servos.
         markerServo = hwMap.get(Servo.class, "markerServo");
@@ -221,7 +222,9 @@ public class RobotHardware
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         bucketMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         bucketMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        mineralMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        mineralMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        mineralMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
 
         // Define and initialize ALL installed servos.
         markerServo = hwMap.get(Servo.class, "markerServo");
