@@ -112,11 +112,15 @@ public class Teleop extends OpMode {
 
         //Mineral arm motor
         if (Math.abs(gamepad2.right_stick_y) > robot.JOYSTICK_BLANK_VALUE) {
-                robot.armMotor.setPower(gamepad2.right_stick_y / 2);
+                robot.armMotor.setPower(gamepad2.right_stick_y / 1.5);
                 robot.bucketServo.setPosition(robot.armMotor.getCurrentPosition() * -0.0002433);
         }
         else {
             robot.armMotor.setPower(0);
+        }
+        if (gamepad2.right_stick_button) {
+            robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
 
         //Bucket servo controls

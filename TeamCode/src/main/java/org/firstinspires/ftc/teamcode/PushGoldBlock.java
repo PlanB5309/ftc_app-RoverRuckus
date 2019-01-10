@@ -17,7 +17,7 @@ public class PushGoldBlock {
         if(loc == robot.LEFT){
             gyroTurn.left(25);
         }else if(loc == robot.RIGHT){
-            gyroTurn.right(29);
+            gyroTurn.right(20);
         }
         robot.sweeperMotor.setPower(-0.5);
         drive.forward(0.5, 30);

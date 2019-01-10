@@ -30,9 +30,10 @@ public class CraterAutonomous extends LinearOpMode {
         waitForStart();
 
         lowerRobot.run();
+        raiseMineralLift.setHalfway();
         openHooks.open();
         gyroTurn.absolute(0);
-        robot.liftMotor.setTargetPosition(0);
+        robot.liftMotor.setTargetPosition(100);
         robot.liftMotor.setPower(0.5);
         while (robot.liftMotor.isBusy()) {
             Thread.yield();
@@ -52,7 +53,7 @@ public class CraterAutonomous extends LinearOpMode {
             gyroTurn.right(45);
         }
         else if (goldPosition == robot.RIGHT) {
-            gyroTurn.left(45);
+            gyroTurn.left(25);
         }
         else { //Position = center
             drive.forward(0.25, 2);
