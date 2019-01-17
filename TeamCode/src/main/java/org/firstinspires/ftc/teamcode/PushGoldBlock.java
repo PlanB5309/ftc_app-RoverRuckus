@@ -20,7 +20,7 @@ public class PushGoldBlock {
             gyroTurn.right(20);
         }
         robot.sweeperMotor.setPower(-0.5);
-        drive.forward(0.5, 30);
+        drive.forward(0.3, 30);
         robot.sweeperMotor.setPower(0);
     }
 //    //2240 counts per rotation
