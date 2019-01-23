@@ -17,6 +17,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 
 @TeleOp(name="Teleop", group="Robot")
 public class Teleop extends OpMode {
+    private double leftPower = 0;
+    private double rightPower = 0;
+    private double armPower = 0;
 
     RobotHardware robot = new RobotHardware(telemetry);
 
@@ -41,12 +44,42 @@ public class Teleop extends OpMode {
 
 
         //Set driving controls on gamepad 1
-        double drive = -gamepad1.left_stick_y;
-        double turn  =  gamepad1.right_stick_x;
-        double leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
-        double rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
+//        double drive = -gamepad1.left_stick_y;
+//        double turn  =  gamepad1.right_stick_x;
+//        double leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
+//        double rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
+//        robot.leftDrive.setPower(leftPower);
+//        robot.rightDrive.setPower(rightPower);
+        leftPower = gamepad1.left_stick_y * gamepad1.left_stick_y;
+        rightPower = gamepad1.right_stick_y * gamepad1.right_stick_y;
+
+        if (gamepad1.left_stick_y > 0) {
+            leftPower *= -1;
+        }
+        if (gamepad1.right_stick_y > 0) {
+            rightPower *= -1;
+        }
         robot.leftDrive.setPower(leftPower);
         robot.rightDrive.setPower(rightPower);
+
+        //Marker dump controls
+        if (gamepad1.b) { //Dump
+            robot.markerServo.setPosition(1);
+        }
+        else if (gamepad1.x) {
+            robot.markerServo.setPosition(0);
+        }
+
+        //Extender motor controls
+        if (gamepad1.y) {
+            robot.extenderMotor.setPower(0.75);
+        }
+        else if (gamepad1.a) {
+            robot.extenderMotor.setPower(-0.75);
+        }
+        else {
+            robot.extenderMotor.setPower(0);
+        }
 
         //Opening and Closing lifter claws with left bumper+trigger
         if (gamepad2.left_bumper) {
@@ -92,8 +125,12 @@ public class Teleop extends OpMode {
 
         //Mineral arm motor
         if (Math.abs(gamepad2.right_stick_y) > robot.JOYSTICK_BLANK_VALUE) {
-                robot.armMotor.setPower(gamepad2.right_stick_y / 1.5);
-                robot.bucketServo.setPosition(robot.armMotor.getCurrentPosition() * -0.0002433);
+                armPower = gamepad2.right_stick_y*gamepad2.right_stick_y;
+                if (gamepad2.right_stick_y > 0) {
+                    armPower *= -1;
+                }
+                robot.armMotor.setPower(armPower);
+                robot.bucketServo.setPosition(robot.armMotor.getCurrentPosition() * 0.0002433);
         }
         else {
             robot.armMotor.setPower(0);

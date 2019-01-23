@@ -65,6 +65,7 @@ public class RobotHardware
     /* Public OpMode members. */
     public DcMotor  leftDrive   = null;
     public DcMotor  rightDrive  = null;
+    public DcMotor extenderMotor = null;
     public Servo    markerServo    = null;
     public Servo    rightClaw   = null;
     public Servo bucketServo = null;
@@ -86,8 +87,6 @@ public class RobotHardware
     public final double RIGHT_CLAW_OPEN = 1.0;
     public final double BUCKET_ARM_RATIO = -0.037;
     public final double RIGHT_CLAW_CLOSED = 0.7;
-    public final double MARKER_CLAW_CLOSED = 0;
-    public final double MARKER_CLAW_OPEN = 1;
     public final double JOYSTICK_BLANK_VALUE = 0.05;
     public final double BUCKET_TURN_VALUE = 0.05;
     public final double BUCKET_SCOOP_POSITION = 0.25;
@@ -121,6 +120,7 @@ public class RobotHardware
         hwMap = ahwMap;
 
         // Define and Initialize Motors
+        extenderMotor = hwMap.get(DcMotor.class, "extenderMotor");
         leftDrive  = hwMap.get(DcMotor.class, "leftDrive");
         rightDrive = hwMap.get(DcMotor.class, "rightDrive");
         liftMotor    = hwMap.get(DcMotor.class, "liftMotor");
@@ -136,6 +136,7 @@ public class RobotHardware
         rightDrive.setPower(0);
         liftMotor.setPower(0);
         sweeperMotor.setPower(0);
+        extenderMotor.setPower(0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
@@ -145,18 +146,19 @@ public class RobotHardware
         rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         sweeperMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        extenderMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         bucketMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         bucketMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        mineralMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        mineralMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        mineralMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.
         markerServo = hwMap.get(Servo.class, "markerServo");
         bucketServo = hwMap.get(Servo.class, "bucketServo");
         rightClaw = hwMap.get(Servo.class, "rightClaw");
-        markerServo.setPosition(MARKER_CLAW_CLOSED);
+        markerServo = hwMap.get(Servo.class, "markerServo");
+        markerServo.setPosition(0);
         rightClaw.setPosition(RIGHT_CLAW_CLOSED);
         bucketServo.setPosition(BUCKET_DUMP_POSITION);
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
@@ -200,6 +202,7 @@ public class RobotHardware
         liftMotor    = hwMap.get(DcMotor.class, "liftMotor");
         sweeperMotor    = hwMap.get(DcMotor.class, "sweeperMotor");
         armMotor = hwMap.get(DcMotor.class, "armMotor");
+        extenderMotor = hwMap.get(DcMotor.class, "extenderMotor");
         mineralMotor = hwMap.get(DcMotor.class, "mineralMotor");
         bucketMotor = hwMap.get(DcMotor.class, "bucketMotor");
         leftDrive.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
@@ -210,6 +213,7 @@ public class RobotHardware
         rightDrive.setPower(0);
         liftMotor.setPower(0);
         sweeperMotor.setPower(0);
+        extenderMotor.setPower(0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
@@ -218,6 +222,7 @@ public class RobotHardware
         leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        extenderMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         sweeperMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -231,7 +236,7 @@ public class RobotHardware
         markerServo = hwMap.get(Servo.class, "markerServo");
         bucketServo = hwMap.get(Servo.class, "bucketServo");
         rightClaw = hwMap.get(Servo.class, "rightClaw");
-        markerServo.setPosition(MARKER_CLAW_CLOSED);
+        markerServo.setPosition(0);
         rightClaw.setPosition(RIGHT_CLAW_CLOSED);
         bucketServo.setPosition(BUCKET_SCOOP_POSITION);
         telemetry.addData("Initialization Complete: ", ":)");
