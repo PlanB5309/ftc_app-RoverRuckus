@@ -3,10 +3,10 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name = "Depot Autonomous V2", group = "Auto")
+@Autonomous(name = "Depot Autonomous V3", group = "Auto")
 
 
-public class DepotAutonomousV2 extends LinearOpMode {
+public class DepotAutonomousV3 extends LinearOpMode {
     RobotHardware robot = new RobotHardware(telemetry);
     LowerRobot lowerRobot = new LowerRobot(robot, telemetry);
     OpenHooks openHooks = new OpenHooks(robot, telemetry);
@@ -30,48 +30,42 @@ public class DepotAutonomousV2 extends LinearOpMode {
         int goldPosition = findGold.run();
         telemetry.addData("Gold position: ", goldPosition);
         telemetry.update();
-        robot.bucketServo.setPosition(robot.BUCKET_DUMP_POSITION);
-        //pushGoldBlock.run(goldPosition);
+        robot.bucketServo.setPosition(robot.BUCKET_SCOOP_POSITION);
+        drive.forward(0.75,6);
+        robot.extenderMotor.setPower(0.75);
+        Thread.sleep(6000);
+        robot.markerServo.setPosition(1);
+        Thread.sleep(500);
+        robot.markerServo.setPosition(0);
+        robot.extenderMotor.setPower(-0.75);
+        Thread.sleep(6000);
+        robot.extenderMotor.setPower(0);
         if (goldPosition == robot.LEFT) {
             gyroTurn.left(20);
             robot.sweeperMotor.setPower(-0.5);
-            drive.forward(0.5, 24);
+            drive.forward(0.75, 24);
             robot.sweeperMotor.setPower(0);
-            gyroTurn.right(15);
-            drive.forward(0.5, 20);
-            robot.markerServo.setPosition(1);
-            Thread.sleep(1000);
-            robot.markerServo.setPosition(0);
-            drive.backward(0.5, 36);
-            gyroTurn.left(90);
-            drive.backward(0.5, 60);
-            gyroTurn.right(45);
-            drive.backward(0.5, 28);
-//            gyroTurn.right(18);
-//            drive.backward(0.5, 56);
+            drive.backward(0.75, 20);
+            gyroTurn.right(20);
         } else if (goldPosition == robot.RIGHT) {
             gyroTurn.right(29);
             robot.sweeperMotor.setPower(-0.5);
-            drive.forward(0.5, 30);
+            drive.forward(0.75, 24);
             robot.sweeperMotor.setPower(0);
-            drive.backward(0.5, 20);
-            gyroTurn.left(155);
-            drive.backward(0.5, 24);
+            drive.backward(0.75, 20);
+            gyroTurn.left(29);
         } else {
             robot.sweeperMotor.setPower(-0.5);
-            drive.forward(0.5, 40);
+            drive.forward(0.75, 24);
             robot.sweeperMotor.setPower(0);
-            robot.markerServo.setPosition(1);
-            Thread.sleep(1000);
-            robot.markerServo.setPosition(0);
-            drive.backward(0.5, 22);
-            gyroTurn.right(90);
-            drive.forward(0.5, 42);
-            gyroTurn.right(45);
-            drive.forward(0.5, 28);
+            drive.backward(0.75, 20);
         }
+        Thread.sleep(100);
+        gyroTurn.right(90);
+        drive.forward(0.5, 12);
+        gyroTurn.right(45);
         while(isStopRequested() == false){
-
+            robot.extenderMotor.setPower(0.75);
         }
     }
 }
