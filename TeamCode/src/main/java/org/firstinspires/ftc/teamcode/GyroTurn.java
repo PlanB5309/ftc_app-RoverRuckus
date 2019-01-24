@@ -86,12 +86,51 @@ public class GyroTurn {
     }
 
     public void absolute(double target) {
-//        robot.leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        robot.rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         updateHeading();
         double diff;
+        diff = target - currHeading;
+        while (Math.abs(diff) > 1) {
+            diff = target - currHeading;
+            telemetry.addData("diff:", diff);
+            if (diff < 0) {
+                if (Math.abs(diff) > 30) {
+                    robot.rightDrive.setPower(-robot.HIGH_TURN_POWER);
+                    robot.leftDrive.setPower(robot.HIGH_TURN_POWER);
+                } else {
+                    robot.leftDrive.setPower(robot.LOW_TURN_POWER);
+                    robot.rightDrive.setPower(-robot.LOW_TURN_POWER);
+                }
+            }
+            if (diff > 0) {
+                if (Math.abs(diff) > 30) {
+                    robot.rightDrive.setPower(robot.HIGH_TURN_POWER);
+                    robot.leftDrive.setPower(-robot.HIGH_TURN_POWER);
+                } else {
+                    robot.leftDrive.setPower(-robot.LOW_TURN_POWER);
+                    robot.rightDrive.setPower(robot.LOW_TURN_POWER);
+                }
+            }
+            updateHeading();
+        }
+        robot.rightDrive.setPower(0);
+        robot.leftDrive.setPower(0);
+    }
+    public void twoWheel(double degrees, int direction) {
+        robot.leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        updateHeading();
+        double diff;
+        double target;
+        if(direction == robot.LEFT)
+            target = currHeading + degrees;
+        else
+            target = currHeading - degrees;
         diff = target - currHeading;
         while (Math.abs(diff) > 1) {
             diff = target - currHeading;

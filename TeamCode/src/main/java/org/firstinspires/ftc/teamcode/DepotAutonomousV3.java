@@ -24,46 +24,49 @@ public class DepotAutonomousV3 extends LinearOpMode {
         waitForStart();
         telemetry.addData("Encoder Value: ", robot.mineralMotor.getCurrentPosition());
         telemetry.update();
+        robot.extenderMotor.setPower(0.75);
         lowerRobot.run();
         openHooks.open();
+        robot.extenderMotor.setPower(0);
         gyroTurn.absolute(0);
         int goldPosition = findGold.run();
         telemetry.addData("Gold position: ", goldPosition);
         telemetry.update();
         robot.bucketServo.setPosition(robot.BUCKET_SCOOP_POSITION);
-        drive.forward(0.75,6);
-        robot.extenderMotor.setPower(0.75);
-        Thread.sleep(6000);
+        drive.forward(0.5,6);
+        gyroTurn.twoWheel(10, robot.RIGHT);
         robot.markerServo.setPosition(1);
         Thread.sleep(500);
         robot.markerServo.setPosition(0);
+        gyroTurn.twoWheel(10, robot.LEFT);
         robot.extenderMotor.setPower(-0.75);
-        Thread.sleep(6000);
-        robot.extenderMotor.setPower(0);
         if (goldPosition == robot.LEFT) {
             gyroTurn.left(20);
             robot.sweeperMotor.setPower(-0.5);
-            drive.forward(0.75, 24);
+            drive.forward(0.5, 24);
             robot.sweeperMotor.setPower(0);
-            drive.backward(0.75, 20);
-            gyroTurn.right(20);
+            drive.backward(0.5, 26);
         } else if (goldPosition == robot.RIGHT) {
             gyroTurn.right(29);
             robot.sweeperMotor.setPower(-0.5);
-            drive.forward(0.75, 24);
+            drive.forward(0.5, 24);
             robot.sweeperMotor.setPower(0);
-            drive.backward(0.75, 20);
-            gyroTurn.left(29);
+            drive.backward(0.5, 26);
         } else {
             robot.sweeperMotor.setPower(-0.5);
-            drive.forward(0.75, 24);
+            drive.forward(0.5, 24);
             robot.sweeperMotor.setPower(0);
-            drive.backward(0.75, 20);
+            drive.backward(0.5, 26);
         }
+        robot.extenderMotor.setPower(0);
+        Thread.sleep(100);
+        gyroTurn.absolute(0);
         Thread.sleep(100);
         gyroTurn.right(90);
+        Thread.sleep(100);
         drive.forward(0.5, 12);
-        gyroTurn.right(45);
+        gyroTurn.right(25);
+        robot.markerServo.setPosition(1);
         while(isStopRequested() == false){
             robot.extenderMotor.setPower(0.75);
         }
