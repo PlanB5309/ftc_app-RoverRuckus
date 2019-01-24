@@ -31,6 +31,17 @@ public class Teleop extends OpMode {
 //    public void start () {
 //        imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
 //    }
+    float getStickValue(float joy){
+        if(-joy < -robot.DEADZONE){
+            return ((-joy+robot.DEADZONE)/(1-robot.DEADZONE));
+        }
+        else if (-joy > robot.DEADZONE){
+            return ((-joy-robot.DEADZONE)/(1-robot.DEADZONE));
+        }
+        else {
+            return(0);
+        }
+    }
 
     public void loop () {
 
@@ -50,17 +61,15 @@ public class Teleop extends OpMode {
 //        double rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
 //        robot.leftDrive.setPower(leftPower);
 //        robot.rightDrive.setPower(rightPower);
-        leftPower = gamepad1.left_stick_y * gamepad1.left_stick_y;
-        rightPower = gamepad1.right_stick_y * gamepad1.right_stick_y;
+        //Primary drive method.
 
-        if (gamepad1.left_stick_y > 0) {
-            leftPower *= -1;
+        float ly = getStickValue(gamepad1.left_stick_y);
+        float rx = getStickValue(gamepad1.right_stick_x);
+        if (!gamepad1.a) {
+            robot.leftDrive.setPower(ly - rx);
+            robot.rightDrive.setPower(ly + rx);
         }
-        if (gamepad1.right_stick_y > 0) {
-            rightPower *= -1;
-        }
-        robot.leftDrive.setPower(leftPower);
-        robot.rightDrive.setPower(rightPower);
+
 
         //Marker dump controls
         if (gamepad1.b) { //Dump
