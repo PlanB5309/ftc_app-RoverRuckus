@@ -34,38 +34,41 @@ public class DepotAutonomousV3 extends LinearOpMode {
         telemetry.update();
         robot.bucketServo.setPosition(robot.BUCKET_SCOOP_POSITION);
         drive.forward(0.5,6);
-        gyroTurn.twoWheel(10, robot.RIGHT);
+        gyroTurn.twoWheel(5, robot.RIGHT);
         robot.markerServo.setPosition(1);
         Thread.sleep(500);
-        robot.markerServo.setPosition(0);
-        gyroTurn.twoWheel(10, robot.LEFT);
+        robot.markerServo.setPosition(0.05);
+        gyroTurn.twoWheel(5, robot.LEFT);
         robot.extenderMotor.setPower(-0.75);
         if (goldPosition == robot.LEFT) {
             gyroTurn.left(20);
             robot.sweeperMotor.setPower(-0.5);
+            robot.extenderMotor.setPower(0);
             drive.forward(0.5, 24);
             robot.sweeperMotor.setPower(0);
-            drive.backward(0.5, 26);
+            drive.backward(0.5, 14);
+            gyroTurn.twoWheel(105, robot.RIGHT);
+            drive.forward(0.5, 6);
         } else if (goldPosition == robot.RIGHT) {
             gyroTurn.right(29);
             robot.sweeperMotor.setPower(-0.5);
+            robot.extenderMotor.setPower(0);
             drive.forward(0.5, 24);
             robot.sweeperMotor.setPower(0);
-            drive.backward(0.5, 26);
+            drive.backward(0.5, 22);
+            gyroTurn.right(56);
         } else {
             robot.sweeperMotor.setPower(-0.5);
             drive.forward(0.5, 24);
             robot.sweeperMotor.setPower(0);
-            drive.backward(0.5, 26);
+            drive.backward(0.5, 22);
+            robot.extenderMotor.setPower(0);
+            gyroTurn.right(85);
         }
-        robot.extenderMotor.setPower(0);
         Thread.sleep(100);
-        gyroTurn.absolute(0);
+        drive.forward(0.5, 5);
         Thread.sleep(100);
-        gyroTurn.right(90);
-        Thread.sleep(100);
-        drive.forward(0.5, 12);
-        gyroTurn.right(25);
+        gyroTurn.right(17);
         robot.markerServo.setPosition(1);
         while(isStopRequested() == false){
             robot.extenderMotor.setPower(0.75);
