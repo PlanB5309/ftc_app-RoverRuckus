@@ -48,7 +48,7 @@ public class DepotAutonomousV3 extends LinearOpMode {
             robot.sweeperMotor.setPower(0);
             drive.backward(0.5, 14);
             gyroTurn.twoWheel(105, robot.RIGHT);
-            drive.forward(0.5, 6);
+            drive.forward(0.5, 8);
         } else if (goldPosition == robot.RIGHT) {
             gyroTurn.right(29);
             robot.sweeperMotor.setPower(-0.5);
