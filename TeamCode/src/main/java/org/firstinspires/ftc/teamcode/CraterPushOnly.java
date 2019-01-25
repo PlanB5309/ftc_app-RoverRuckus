@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 @Autonomous(name="Crater Autonomous", group="Auto")
 
-public class CraterAutonomous extends LinearOpMode {
+public class CraterPushOnly extends LinearOpMode {
     RobotHardware robot = new RobotHardware(telemetry);
     LowerRobot lowerRobot = new LowerRobot(robot, telemetry);
     OpenHooks openHooks = new OpenHooks(robot, telemetry);
@@ -38,31 +38,16 @@ public class CraterAutonomous extends LinearOpMode {
         telemetry.update();
 //        mineralLift.setHalfway();
         pushGoldBlock.run(goldPosition);
-        drive.backward(0.6, 20);
-//      Turn to original position
-        if (goldPosition ==robot.RIGHT) {
-            gyroTurn.left(105);
-        } else if (goldPosition == robot.LEFT) {
-            gyroTurn.left(45);
-        } else if (goldPosition == robot.CENTER) {
-            gyroTurn.left(80);
+        if (goldPosition == robot.CENTER) { //Test these three if clauses
+            drive.forward(0.5, 7);
         }
-        drive.forward(0.6, 30);
-        gyroTurn.twoWheel(25, robot.LEFT);
-
-
-        //Dump marker
-        robot.extenderMotor.setPower(1);
-        Thread.sleep(5000);
-        robot.extenderMotor.setPower(0);
-        robot.markerServo.setPosition(1);
-
-        //Park in crater
-        gyroTurn.twoWheel(17,robot.LEFT);
-        robot.extenderMotor.setPower(-1);
-        drive.backward(0.6, 15);
-        robot.extenderMotor.setPower(0);
-
+        else if (goldPosition == robot.LEFT) {
+            drive.backward(0.6, 10);
+        }
+        else if (goldPosition == robot.RIGHT) {
+            drive.backward(0.6, 10);
+        }
+//
         while(isStopRequested() == false){
         }
     }
