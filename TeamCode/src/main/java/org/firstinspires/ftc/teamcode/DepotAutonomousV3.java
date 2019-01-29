@@ -27,51 +27,59 @@ public class DepotAutonomousV3 extends LinearOpMode {
         robot.extenderMotor.setPower(0.75);
         lowerRobot.run();
         openHooks.open();
-        robot.extenderMotor.setPower(0);
         gyroTurn.absolute(0);
         int goldPosition = findGold.run();
         telemetry.addData("Gold position: ", goldPosition);
         telemetry.update();
-        robot.bucketServo.setPosition(robot.BUCKET_SCOOP_POSITION);
-        drive.forward(0.5,6);
+        drive.forward(0.4,10);
         gyroTurn.twoWheel(5, robot.RIGHT);
         robot.markerServo.setPosition(1);
         Thread.sleep(500);
         robot.markerServo.setPosition(0.05);
-        gyroTurn.twoWheel(5, robot.LEFT);
+        robot.extenderMotor.setPower(0);
+        gyroTurn.twoWheel(7, robot.LEFT);
+        Thread.sleep(500);
         robot.extenderMotor.setPower(-0.75);
         if (goldPosition == robot.LEFT) {
-            gyroTurn.left(20);
+            drive.backward(0.4, 4);
+            gyroTurn.twoWheel(20, robot.LEFT);
             robot.sweeperMotor.setPower(-0.5);
             robot.extenderMotor.setPower(0);
-            drive.forward(0.5, 24);
+            drive.forward(0.4, 24);
             robot.sweeperMotor.setPower(0);
-            drive.backward(0.5, 14);
-            gyroTurn.twoWheel(105, robot.RIGHT);
-            drive.forward(0.5, 8);
+            drive.backward(0.4, 15);
+            gyroTurn.twoWheel(80, robot.RIGHT);
+            gyroTurn.twoWheel(20, robot.RIGHT);
+            drive.forward(0.4, 30);
+            gyroTurn.twoWheel(40, robot.RIGHT);
+            robot.extenderMotor.setPower(0.75);
+            robot.markerServo.setPosition(1);
         } else if (goldPosition == robot.RIGHT) {
-            gyroTurn.right(29);
+            drive.backward(0.4, 4);
+            gyroTurn.twoWheel(29, robot.RIGHT);
             robot.sweeperMotor.setPower(-0.5);
             robot.extenderMotor.setPower(0);
-            drive.forward(0.5, 24);
+            drive.forward(0.4, 24);
             robot.sweeperMotor.setPower(0);
-            drive.backward(0.5, 22);
-            gyroTurn.right(56);
+            gyroTurn.twoWheel(95, robot.RIGHT);
+            drive.forward(0.4, 8);
+            robot.extenderMotor.setPower(0.75);
+            robot.markerServo.setPosition(1);
         } else {
             robot.sweeperMotor.setPower(-0.5);
-            drive.forward(0.5, 24);
+            drive.forward(0.4, 20);
             robot.sweeperMotor.setPower(0);
-            drive.backward(0.5, 22);
+            Thread.sleep(1000);
             robot.extenderMotor.setPower(0);
-            gyroTurn.right(85);
-        }
-        Thread.sleep(100);
-        drive.forward(0.5, 5);
-        Thread.sleep(100);
-        gyroTurn.right(17);
-        robot.markerServo.setPosition(1);
-        while(isStopRequested() == false){
+            drive.backward(0.4, 9);
+            gyroTurn.twoWheel(90, robot.RIGHT);
+            drive.forward(0.4, 18);
+            gyroTurn.twoWheel(22, robot.RIGHT);
             robot.extenderMotor.setPower(0.75);
+            robot.markerServo.setPosition(1);
+        }
+        while(!isStopRequested()){
+
         }
     }
 }

@@ -65,10 +65,8 @@ public class Teleop extends OpMode {
 
         float ly = getStickValue(gamepad1.left_stick_y);
         float rx = getStickValue(gamepad1.right_stick_x);
-        if (!gamepad1.a) {
-            robot.leftDrive.setPower(ly - rx);
-            robot.rightDrive.setPower(ly + rx);
-        }
+        robot.leftDrive.setPower(ly - rx);
+        robot.rightDrive.setPower(ly + rx);
 
 
         //Marker dump controls
@@ -83,7 +81,7 @@ public class Teleop extends OpMode {
         if (gamepad1.y) {
             robot.extenderMotor.setPower(0.75);
         }
-        else if (gamepad1.a) {
+        else if (gamepad1.a && !gamepad1.start) {
             robot.extenderMotor.setPower(-0.75);
         }
         else {

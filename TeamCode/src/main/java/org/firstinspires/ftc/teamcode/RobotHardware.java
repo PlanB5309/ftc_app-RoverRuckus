@@ -159,9 +159,9 @@ public class RobotHardware
         bucketServo = hwMap.get(Servo.class, "bucketServo");
         rightClaw = hwMap.get(Servo.class, "rightClaw");
         markerServo = hwMap.get(Servo.class, "markerServo");
-        markerServo.setPosition(0);
+        markerServo.setPosition(0.05);
         rightClaw.setPosition(RIGHT_CLAW_CLOSED);
-        bucketServo.setPosition(BUCKET_DUMP_POSITION);
+        bucketServo.setPosition(BUCKET_SCOOP_POSITION);
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
         parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;

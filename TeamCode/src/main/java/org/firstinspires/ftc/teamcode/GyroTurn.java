@@ -38,14 +38,14 @@ public class GyroTurn {
             diff = target - currHeading;
             telemetry.addData("diff: ", diff);
             if (diff < 0) {
-                if (Math.abs(diff) > 30)
+                if (Math.abs(diff) > 25)
                     robot.leftDrive.setPower(robot.HIGH_TURN_POWER);
                 else {
                     robot.leftDrive.setPower(robot.LOW_TURN_POWER);
                 }
             }
             if (diff > 0) {
-                if (Math.abs(diff) > 30)
+                if (Math.abs(diff) > 25)
                     robot.leftDrive.setPower(-robot.HIGH_TURN_POWER);
                 else {
                     robot.leftDrive.setPower(-robot.LOW_TURN_POWER);
@@ -67,14 +67,14 @@ public class GyroTurn {
             diff = target - currHeading;
             telemetry.addData("diff:", diff);
             if (diff < 0) {
-                if (Math.abs(diff) > 30)
+                if (Math.abs(diff) > 25)
                     robot.rightDrive.setPower(-robot.HIGH_TURN_POWER);
                 else {
                     robot.rightDrive.setPower(-robot.LOW_TURN_POWER);
                 }
             }
             if (diff > 0) {
-                if (Math.abs(diff) > 30)
+                if (Math.abs(diff) > 25)
                     robot.rightDrive.setPower(robot.HIGH_TURN_POWER);
                 else {
                     robot.rightDrive.setPower(robot.LOW_TURN_POWER);
@@ -97,7 +97,7 @@ public class GyroTurn {
             diff = target - currHeading;
             telemetry.addData("diff:", diff);
             if (diff < 0) {
-                if (Math.abs(diff) > 30) {
+                if (Math.abs(diff) > 25) {
                     robot.rightDrive.setPower(-robot.HIGH_TURN_POWER);
                     robot.leftDrive.setPower(robot.HIGH_TURN_POWER);
                 } else {
@@ -106,7 +106,7 @@ public class GyroTurn {
                 }
             }
             if (diff > 0) {
-                if (Math.abs(diff) > 30) {
+                if (Math.abs(diff) > 25) {
                     robot.rightDrive.setPower(robot.HIGH_TURN_POWER);
                     robot.leftDrive.setPower(-robot.HIGH_TURN_POWER);
                 } else {
@@ -136,7 +136,7 @@ public class GyroTurn {
             diff = target - currHeading;
             telemetry.addData("diff:", diff);
             if (diff < 0) {
-                if (Math.abs(diff) > 30) {
+                if (Math.abs(diff) > 25) {
                     robot.rightDrive.setPower(-robot.HIGH_TURN_POWER);
                     robot.leftDrive.setPower(robot.HIGH_TURN_POWER);
                 } else {
@@ -145,7 +145,7 @@ public class GyroTurn {
                 }
             }
             if (diff > 0) {
-                if (Math.abs(diff) > 30) {
+                if (Math.abs(diff) > 25 ) {
                     robot.rightDrive.setPower(robot.HIGH_TURN_POWER);
                     robot.leftDrive.setPower(-robot.HIGH_TURN_POWER);
                 } else {
