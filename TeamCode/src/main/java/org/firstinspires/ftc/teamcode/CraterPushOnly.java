@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-@Autonomous(name="Crater Autonomous", group="Auto")
+@Autonomous(name="Crater Push Only", group="Auto")
 
 public class CraterPushOnly extends LinearOpMode {
     RobotHardware robot = new RobotHardware(telemetry);
