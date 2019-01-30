@@ -21,31 +21,24 @@ public class CraterPushOnly extends LinearOpMode {
 
         robot.init(hardwareMap);
         waitForStart();
-        //Uncomment to gyroturn.abs
         lowerRobot.run();
-//        mineralLift.setHalfway();
         openHooks.open();
         gyroTurn.absolute(0);
         robot.bucketServo.setPosition(robot.BUCKET_SCOOP_POSITION);
-//        robot.liftMotor.setTargetPosition(100);
-//        robot.liftMotor.setPower(0.5);
-//        while (robot.liftMotor.isBusy()) {
-//            Thread.yield();
-//        }
-//        robot.liftMotor.setPower(0);
+
         goldPosition = findGold.run();
         telemetry.addData("Gold Position: ", goldPosition);
         telemetry.update();
-//        mineralLift.setHalfway();
+
         pushGoldBlock.run(goldPosition);
         if (goldPosition == robot.CENTER) { //Test these three if clauses
             drive.forward(0.5, 7);
         }
         else if (goldPosition == robot.LEFT) {
-            drive.backward(0.6, 10);
+            drive.forward(0.5, 2);
         }
         else if (goldPosition == robot.RIGHT) {
-            drive.backward(0.6, 10);
+            drive.forward(0.5, 2);
         }
 //
         while(isStopRequested() == false){

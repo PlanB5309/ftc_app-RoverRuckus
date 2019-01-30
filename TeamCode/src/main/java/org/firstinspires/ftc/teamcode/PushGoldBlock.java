@@ -16,12 +16,19 @@ public class PushGoldBlock {
         Drive drive = new Drive(robot, telemetry);
         if(loc == robot.LEFT){
             gyroTurn.left(25);
+            robot.sweeperMotor.setPower(-0.5);
+            drive.forward(0.3, 30);
+            robot.sweeperMotor.setPower(0);
         }else if(loc == robot.RIGHT){
             gyroTurn.right(20);
+            robot.sweeperMotor.setPower(-0.5);
+            drive.forward(0.3, 20);
+            robot.sweeperMotor.setPower(0);
+        }else if (loc == robot.CENTER) {
+            robot.sweeperMotor.setPower(-0.5);
+            drive.forward(0.3, 30);
+            robot.sweeperMotor.setPower(0);
         }
-        robot.sweeperMotor.setPower(-0.5);
-        drive.forward(0.3, 30);
-        robot.sweeperMotor.setPower(0);
     }
 //    //2240 counts per rotation
 //        robot.sweeperMotor.setPower(-1);

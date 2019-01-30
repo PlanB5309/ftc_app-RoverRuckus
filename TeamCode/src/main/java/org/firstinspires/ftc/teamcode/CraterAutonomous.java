@@ -21,48 +21,73 @@ public class CraterAutonomous extends LinearOpMode {
 
         robot.init(hardwareMap);
         waitForStart();
-        //Uncomment to gyroturn.abs
         lowerRobot.run();
-//        mineralLift.setHalfway();
         openHooks.open();
         gyroTurn.absolute(0);
         robot.bucketServo.setPosition(robot.BUCKET_SCOOP_POSITION);
-//        robot.liftMotor.setTargetPosition(100);
-//        robot.liftMotor.setPower(0.5);
-//        while (robot.liftMotor.isBusy()) {
-//            Thread.yield();
-//        }
-//        robot.liftMotor.setPower(0);
+
         goldPosition = findGold.run();
         telemetry.addData("Gold Position: ", goldPosition);
         telemetry.update();
-//        mineralLift.setHalfway();
+
         pushGoldBlock.run(goldPosition);
-        drive.backward(0.6, 20);
-//      Turn to original position
-        if (goldPosition ==robot.RIGHT) {
-            gyroTurn.left(105);
-        } else if (goldPosition == robot.LEFT) {
-            gyroTurn.left(45);
-        } else if (goldPosition == robot.CENTER) {
-            gyroTurn.left(80);
+        if (goldPosition == robot.CENTER) {
+            drive.backward(0.4, 10);
+            gyroTurn.twoWheel(85, robot.LEFT);
+            drive.forward(0.4, 32);
+            gyroTurn.twoWheel(25, robot.LEFT);
+
+            robot.extenderMotor.setPower(0.5);
+            Thread.sleep(6000);
+            robot.markerServo.setPosition(1);
+            robot.extenderMotor.setPower(0);
+            Thread.sleep(500);
+
+            robot.markerServo.setPosition(0.05);
+            robot.extenderMotor.setPower(-1);
+            gyroTurn.twoWheel(40, robot.LEFT);
+            drive.backward(0.5, 28);
+            robot.extenderMotor.setPower(0);
         }
-        drive.forward(0.6, 30);
-        gyroTurn.twoWheel(25, robot.LEFT);
+        else if (goldPosition == robot.LEFT) {
+            drive.backward(0.5, 4);
+            gyroTurn.twoWheel(40, robot.LEFT);
+            drive.forward(0.5, 14);
+            gyroTurn.twoWheel(35, robot.LEFT);
+            drive.forward(0.5, 10);
 
-        //woof woof
-        //Dump marker
-        robot.extenderMotor.setPower(1);
-        Thread.sleep(5000);
-        robot.extenderMotor.setPower(0);
-        robot.markerServo.setPosition(1);
+            robot.extenderMotor.setPower(0.5);
+            Thread.sleep(6000);
+            robot.markerServo.setPosition(1);
+            robot.extenderMotor.setPower(0);
+            Thread.sleep(500);
 
-        //Park in crater
-        gyroTurn.twoWheel(17,robot.LEFT);
-        robot.extenderMotor.setPower(-1);
-        drive.backward(0.6, 15);
-        robot.extenderMotor.setPower(0);
+            robot.markerServo.setPosition(0.05);
+            robot.extenderMotor.setPower(-1);
+            gyroTurn.twoWheel(10, robot.LEFT);
+            drive.backward(0.5, 22);
+            robot.extenderMotor.setPower(0);
+        }
+        else if (goldPosition == robot.RIGHT) {
+            drive.backward(0.4, 10);
+            gyroTurn.twoWheel(90, robot.LEFT);
+            drive.forward(0.4, 35);
+            gyroTurn.twoWheel(30, robot.LEFT);
+            drive.forward(0.4, 3);
 
+            robot.extenderMotor.setPower(0.5);
+            Thread.sleep(6000);
+            robot.markerServo.setPosition(1);
+            robot.extenderMotor.setPower(0);
+            Thread.sleep(500);
+
+            robot.markerServo.setPosition(0.05);
+            robot.extenderMotor.setPower(-1);
+            gyroTurn.twoWheel(47, robot.LEFT);
+            drive.backward(0.5, 28);
+            robot.extenderMotor.setPower(0);
+        }
+//
         while(isStopRequested() == false){
         }
     }
