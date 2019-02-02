@@ -37,7 +37,7 @@ public class DepotAutonomousV3 extends LinearOpMode {
         Thread.sleep(500);
         robot.markerServo.setPosition(0.05);
         robot.extenderMotor.setPower(0);
-        gyroTurn.twoWheel(7, robot.LEFT);
+        gyroTurn.twoWheel(5, robot.LEFT);
         Thread.sleep(500);
         robot.extenderMotor.setPower(-0.75);
         if (goldPosition == robot.LEFT) {
@@ -74,7 +74,7 @@ public class DepotAutonomousV3 extends LinearOpMode {
             drive.backward(0.4, 9);
             gyroTurn.twoWheel(90, robot.RIGHT);
             drive.forward(0.4, 18);
-            gyroTurn.twoWheel(22, robot.RIGHT);
+            gyroTurn.twoWheel(24, robot.RIGHT);
             robot.extenderMotor.setPower(0.75);
             robot.markerServo.setPosition(1);
         }

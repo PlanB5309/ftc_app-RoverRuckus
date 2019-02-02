@@ -37,7 +37,7 @@ public class DepotAutonomousV3PushOnly extends LinearOpMode {
         Thread.sleep(500);
         robot.markerServo.setPosition(0.05);
         robot.extenderMotor.setPower(0);
-        gyroTurn.twoWheel(7, robot.LEFT);
+        gyroTurn.twoWheel(5, robot.LEFT);
         Thread.sleep(500);
         robot.extenderMotor.setPower(-0.75);
         drive.backward(0.5, 4);
