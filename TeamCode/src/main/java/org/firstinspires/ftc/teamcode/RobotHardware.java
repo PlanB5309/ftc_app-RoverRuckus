@@ -1,38 +1,8 @@
-/* Copyright (c) 2017 FIRST. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted (subject to the limitations in the disclaimer below) provided that
- * the following conditions are met:
- *
- * Redistributions of source code must retain the above copyright notice, this list
- * of conditions and the following disclaimer.
- *
- * Redistributions in binary form must reproduce the above copyright notice, this
- * list of conditions and the following disclaimer in the documentation and/or
- * other materials provided with the distribution.
- *
- * Neither the name of FIRST nor the names of its contributors may be used to endorse or
- * promote products derived from this software without specific prior written permission.
- *
- * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS
- * LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
- * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -44,22 +14,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
-/**
- * This is NOT an opmode.
- *
- * This class can be used to define all the specific hardware for a single robot.
- * In this case that robot is a Pushbot.
- * See PushbotTeleopTank_Iterative and others classes starting with "Pushbot" for usage examples.
- *
- * This hardware class assumes the following device names have been configured on the robot:
- * Note:  All names are lower case and some have single spaces between words.
- *
- * Motor channel:  Left  drive motor:        "left_drive"
- * Motor channel:  Right drive motor:        "right_drive"
- * Motor channel:  Manipulator drive motor:  "left_arm"
- * Servo channel:  Servo to open left claw:  "left_claw"
- * Servo channel:  Servo to open right claw: "right_claw"
- */
 public class RobotHardware
 {
     /* Public OpMode members. */
@@ -75,14 +29,12 @@ public class RobotHardware
     public DcMotor bucketMotor = null;
     BNO055IMU imu;
     public DcMotor mineralMotor = null;
+    public Servo rakeServo = null;
     public final int RIGHT = 112;
     public final int LEFT = 211;
     public final int CENTER = 121;
     public final double HIGH_TURN_POWER = 0.3;
     public final double LOW_TURN_POWER = 0.07;
-    public static final double SWEEPER_POWER = 1;
-//    public final double LEFT_CLAW_OPEN = 0.2;
-//    public final double LEFT_CLAW_CLOSED = 0.7;
     public final double TENSORFLOW_SENSETIVITY = 0.9;
     public final double RIGHT_CLAW_OPEN = 1.0;
     public final double BUCKET_ARM_RATIO = -0.037;
@@ -93,6 +45,7 @@ public class RobotHardware
     public final double BUCKET_CARRY_POSITION = 0;
     public final double BUCKET_DUMP_POSITION = 0;
     public final float DEADZONE = .15f;
+    public final double RAKE_UP = 0.5;
     static final double     COUNTS_PER_MOTOR_REV    = 1180 ;
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;
     static final double     WHEEL_DIAMETER_INCHES   = 3.54 ;
@@ -159,6 +112,8 @@ public class RobotHardware
         bucketServo = hwMap.get(Servo.class, "bucketServo");
         rightClaw = hwMap.get(Servo.class, "rightClaw");
         markerServo = hwMap.get(Servo.class, "markerServo");
+        rakeServo = hwMap.get(Servo.class, "rakeServo");
+        rakeServo.setPosition(RAKE_UP);
         markerServo.setPosition(0.05);
         rightClaw.setPosition(RIGHT_CLAW_CLOSED);
         bucketServo.setPosition(BUCKET_SCOOP_POSITION);
@@ -172,8 +127,6 @@ public class RobotHardware
 
         imu = hwMap.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
-        Orientation angles;
-        Acceleration gravity;
         VuforiaLocalizer.Parameters param = new VuforiaLocalizer.Parameters();
 
         param.vuforiaLicenseKey = VUFORIA_KEY;
@@ -237,6 +190,8 @@ public class RobotHardware
         markerServo = hwMap.get(Servo.class, "markerServo");
         bucketServo = hwMap.get(Servo.class, "bucketServo");
         rightClaw = hwMap.get(Servo.class, "rightClaw");
+        rakeServo = hwMap.get(Servo.class, "rakeServo");
+        rakeServo.setPosition(RAKE_UP);
         markerServo.setPosition(0);
         rightClaw.setPosition(RIGHT_CLAW_CLOSED);
         bucketServo.setPosition(BUCKET_SCOOP_POSITION);

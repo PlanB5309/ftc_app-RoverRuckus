@@ -1,24 +1,11 @@
 package org.firstinspires.ftc.teamcode;
-
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.robotcore.external.navigation.Position;
-import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
-
-
 @TeleOp(name="Teleop", group="Robot")
 public class Teleop extends OpMode {
-    private double leftPower = 0;
-    private double rightPower = 0;
     private double armPower = 0;
 
     RobotHardware robot = new RobotHardware(telemetry);
@@ -88,6 +75,13 @@ public class Teleop extends OpMode {
             robot.extenderMotor.setPower(0);
         }
 
+        //Crater rake controls
+        if (gamepad1.x){
+            robot.rakeServo.setPosition(Range.clip(robot.rakeServo.getPosition()-0.002, 0, 0.6));
+        }
+        else if(gamepad1.b){
+            robot.rakeServo.setPosition(Range.clip(robot.rakeServo.getPosition()+0.002, 0, 0.6));
+        }
         //Opening and Closing lifter claws with left bumper+trigger
         if (gamepad2.left_bumper) {
             robot.rightClaw.setPosition(robot.RIGHT_CLAW_OPEN);
