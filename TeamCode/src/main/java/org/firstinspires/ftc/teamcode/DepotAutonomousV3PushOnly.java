@@ -53,6 +53,7 @@ public class DepotAutonomousV3PushOnly extends LinearOpMode {
             robot.extenderMotor.setPower(0);
             drive.forward(0.5, 24);
             robot.sweeperMotor.setPower(0);
+            drive.backward(0.5, 15);
         } else {
             robot.sweeperMotor.setPower(-0.5);
             drive.forward(0.5, 24);
