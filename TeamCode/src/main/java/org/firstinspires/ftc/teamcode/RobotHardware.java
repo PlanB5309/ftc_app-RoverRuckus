@@ -9,8 +9,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
@@ -20,8 +18,8 @@ public class RobotHardware
     public DcMotor  leftDrive   = null;
     public DcMotor  rightDrive  = null;
     public DcMotor extenderMotor = null;
-    public Servo    markerServo    = null;
-    public Servo    rightClaw   = null;
+    public Servo markerServo = null;
+    public Servo hookServo = null;
     public Servo bucketServo = null;
     public DcMotor liftMotor = null;
     public DcMotor sweeperMotor = null;
@@ -45,7 +43,9 @@ public class RobotHardware
     public final double BUCKET_CARRY_POSITION = 0;
     public final double BUCKET_DUMP_POSITION = 0;
     public final float DEADZONE = .15f;
-    public final double RAKE_UP = 0.5;
+    public final double RAKE_INIT = 0.55;
+    public final double RAKE_TELEOP = 0.45;
+    public final double RAKE_DOWN = 0;
     static final double     COUNTS_PER_MOTOR_REV    = 1180 ;
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;
     static final double     WHEEL_DIAMETER_INCHES   = 3.54 ;
@@ -110,12 +110,11 @@ public class RobotHardware
         // Define and initialize ALL installed servos.
         markerServo = hwMap.get(Servo.class, "markerServo");
         bucketServo = hwMap.get(Servo.class, "bucketServo");
-        rightClaw = hwMap.get(Servo.class, "rightClaw");
-        markerServo = hwMap.get(Servo.class, "markerServo");
+        hookServo = hwMap.get(Servo.class, "hookServo");
         rakeServo = hwMap.get(Servo.class, "rakeServo");
-        rakeServo.setPosition(RAKE_UP);
+        rakeServo.setPosition(RAKE_INIT);
         markerServo.setPosition(0.05);
-        rightClaw.setPosition(RIGHT_CLAW_CLOSED);
+        hookServo.setPosition(RIGHT_CLAW_CLOSED);
         bucketServo.setPosition(BUCKET_SCOOP_POSITION);
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
@@ -189,11 +188,10 @@ public class RobotHardware
         // Define and initialize ALL installed servos.
         markerServo = hwMap.get(Servo.class, "markerServo");
         bucketServo = hwMap.get(Servo.class, "bucketServo");
-        rightClaw = hwMap.get(Servo.class, "rightClaw");
+        hookServo = hwMap.get(Servo.class, "hookServo");
         rakeServo = hwMap.get(Servo.class, "rakeServo");
-        rakeServo.setPosition(RAKE_UP);
         markerServo.setPosition(0);
-        rightClaw.setPosition(RIGHT_CLAW_CLOSED);
+        hookServo.setPosition(RIGHT_CLAW_CLOSED);
         bucketServo.setPosition(BUCKET_SCOOP_POSITION);
         telemetry.addData("Initialization Complete: ", ":)");
         telemetry.update();

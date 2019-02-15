@@ -15,9 +15,10 @@ public class Teleop extends OpMode {
     }
 
     //When play is hit
-//    public void start () {
-//        imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
-//    }
+    public void start () {
+        robot.rakeServo.setPosition(robot.RAKE_TELEOP);
+    }
+
     float getStickValue(float joy){
         if(-joy < -robot.DEADZONE){
             return ((-joy+robot.DEADZONE)/(1-robot.DEADZONE));
@@ -76,18 +77,18 @@ public class Teleop extends OpMode {
         }
 
         //Crater rake controls
-        if (gamepad1.x){
-            robot.rakeServo.setPosition(Range.clip(robot.rakeServo.getPosition()-0.002, 0, 0.6));
+        if (gamepad1.right_bumper){
+            robot.rakeServo.setPosition(Range.clip(robot.rakeServo.getPosition()-0.01, robot.RAKE_DOWN, robot.RAKE_INIT));
         }
-        else if(gamepad1.b){
-            robot.rakeServo.setPosition(Range.clip(robot.rakeServo.getPosition()+0.002, 0, 0.6));
+        else if(gamepad1.right_trigger > 0.5){
+            robot.rakeServo.setPosition(Range.clip(robot.rakeServo.getPosition()+0.01, 0, 0.6));
         }
         //Opening and Closing lifter claws with left bumper+trigger
         if (gamepad2.left_bumper) {
-            robot.rightClaw.setPosition(robot.RIGHT_CLAW_OPEN);
+            robot.hookServo.setPosition(robot.RIGHT_CLAW_OPEN);
         }
         if (gamepad2.left_trigger > 0.5) {
-            robot.rightClaw.setPosition(robot.RIGHT_CLAW_CLOSED);
+            robot.hookServo.setPosition(robot.RIGHT_CLAW_CLOSED);
         }
 
         //Setting lift motor power to arrow pad
