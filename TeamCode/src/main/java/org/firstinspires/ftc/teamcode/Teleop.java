@@ -78,7 +78,7 @@ public class Teleop extends OpMode {
 
         //Crater rake controls
         if (gamepad1.left_bumper){
-            robot.rakeServo.setPosition(Range.clip(robot.rakeServo.getPosition()-0.015, robot.RAKE_DOWN, robot.RAKE_INIT));
+            robot.rakeServo.setPosition(Range.clip(robot.rakeServo.getPosition()-0.015, robot.RAKE_DOWN, robot.RAKE_TELEOP));
         }
         else if(gamepad1.left_trigger > 0.5){
             robot.rakeServo.setPosition(Range.clip(robot.rakeServo.getPosition()+0.015, 0, 0.6));

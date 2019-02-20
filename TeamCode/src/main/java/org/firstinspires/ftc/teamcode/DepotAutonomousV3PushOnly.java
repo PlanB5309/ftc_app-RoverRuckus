@@ -43,19 +43,19 @@ public class DepotAutonomousV3PushOnly extends LinearOpMode {
         drive.backward(0.5, 4);
         if (goldPosition == robot.LEFT) {
             gyroTurn.twoWheel(20, robot.LEFT);
-            robot.sweeperMotor.setPower(-0.5);
+            robot.sweeperMotor.setPower(0.5);
             robot.extenderMotor.setPower(0);
             drive.forward(0.5, 24);
             robot.sweeperMotor.setPower(0);
         } else if (goldPosition == robot.RIGHT) {
             gyroTurn.twoWheel(29, robot.RIGHT);
-            robot.sweeperMotor.setPower(-0.5);
+            robot.sweeperMotor.setPower(0.5);
             robot.extenderMotor.setPower(0);
             drive.forward(0.5, 24);
             robot.sweeperMotor.setPower(0);
             drive.backward(0.5, 15);
         } else {
-            robot.sweeperMotor.setPower(-0.5);
+            robot.sweeperMotor.setPower(0.5);
             drive.forward(0.5, 24);
             robot.sweeperMotor.setPower(0);
             Thread.sleep(1000);

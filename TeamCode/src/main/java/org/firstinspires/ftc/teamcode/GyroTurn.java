@@ -30,11 +30,15 @@ public class GyroTurn {
     public void right(double degrees) throws InterruptedException {
         robot.leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         updateHeading();
         double target = currHeading - degrees;
         double diff;
         diff = target - currHeading;
         while (Math.abs(diff) > 1) {
+            robot.rightDrive.setPower(0.5);
+            robot.rightDrive.setTargetPosition(0);
             diff = target - currHeading;
             telemetry.addData("diff: ", diff);
             if (diff < 0) {
@@ -54,16 +58,21 @@ public class GyroTurn {
             updateHeading();
         }
         robot.leftDrive.setPower(0);
+        robot.rightDrive.setPower(0);
     }
 
     public void left(double degrees) throws InterruptedException {
         robot.rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         updateHeading();
         double target = currHeading + degrees;
         double diff;
         diff = target - currHeading;
         while (Math.abs(diff) > 1) {
+            robot.leftDrive.setPower(0.5);
+            robot.leftDrive.setTargetPosition(0);
             diff = target - currHeading;
             telemetry.addData("diff:", diff);
             if (diff < 0) {
@@ -83,6 +92,7 @@ public class GyroTurn {
             updateHeading();
         }
         robot.rightDrive.setPower(0);
+        robot.leftDrive.setPower(0);
     }
 
     public void absolute(double target) {

@@ -43,8 +43,8 @@ public class RobotHardware
     public final double BUCKET_CARRY_POSITION = 0;
     public final double BUCKET_DUMP_POSITION = 0;
     public final float DEADZONE = .15f;
-    public final double RAKE_INIT = 0.55;
-    public final double RAKE_TELEOP = 0.45;
+    public final double RAKE_INIT = 0.68;
+    public final double RAKE_TELEOP = 0.55;
     public final double RAKE_DOWN = 0;
     static final double     COUNTS_PER_MOTOR_REV    = 1180 ;
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;
