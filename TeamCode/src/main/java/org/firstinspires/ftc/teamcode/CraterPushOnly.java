@@ -29,8 +29,8 @@ public class CraterPushOnly extends LinearOpMode {
         goldPosition = findGold.run();
         telemetry.addData("Gold Position: ", goldPosition);
         telemetry.update();
-
         pushGoldBlock.run(goldPosition);
+
         if (goldPosition == robot.CENTER) { //Test these three if clauses
             drive.forward(0.5, 7);
         }
