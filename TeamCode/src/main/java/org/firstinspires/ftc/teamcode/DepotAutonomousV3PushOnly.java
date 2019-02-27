@@ -33,9 +33,9 @@ public class DepotAutonomousV3PushOnly extends LinearOpMode {
         telemetry.update();
         drive.forward(0.5,10);
         gyroTurn.twoWheel(5, robot.RIGHT);
-        robot.markerServo.setPosition(1);
+        robot.markerServo.setPosition(robot.MARKER_OUT);
         Thread.sleep(500);
-        robot.markerServo.setPosition(0.05);
+        robot.markerServo.setPosition(robot.MARKER_IN);
         robot.extenderMotor.setPower(0);
         gyroTurn.twoWheel(5, robot.LEFT);
         Thread.sleep(500);
@@ -51,9 +51,9 @@ public class DepotAutonomousV3PushOnly extends LinearOpMode {
             gyroTurn.twoWheel(29, robot.RIGHT);
             robot.sweeperMotor.setPower(0.5);
             robot.extenderMotor.setPower(0);
-            drive.forward(0.5, 24);
+            drive.forward(0.5, 30);
+            drive.backward(0.5, 21);
             robot.sweeperMotor.setPower(0);
-            drive.backward(0.5, 15);
         } else {
             robot.sweeperMotor.setPower(0.5);
             drive.forward(0.5, 24);

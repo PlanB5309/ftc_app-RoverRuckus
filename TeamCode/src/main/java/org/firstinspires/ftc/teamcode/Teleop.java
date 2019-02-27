@@ -17,6 +17,7 @@ public class Teleop extends OpMode {
     //When play is hit
     public void start () {
         robot.rakeServo.setPosition(robot.RAKE_TELEOP);
+        robot.markerServo.setPosition(robot.MARKER_IN);
     }
 
     float getStickValue(float joy){
@@ -59,10 +60,10 @@ public class Teleop extends OpMode {
 
         //Marker dump controls
         if (gamepad1.b) { //Dump
-            robot.markerServo.setPosition(1);
+            robot.markerServo.setPosition(robot.MARKER_OUT);
         }
         else if (gamepad1.x) {
-            robot.markerServo.setPosition(0);
+            robot.markerServo.setPosition(robot.MARKER_IN);
         }
 
         //Extender motor controls
@@ -94,6 +95,7 @@ public class Teleop extends OpMode {
         //Setting lift motor power to arrow pad
         if (gamepad2.dpad_up) {
             robot.liftMotor.setPower(1);
+            robot.rakeServo.setPosition(robot.RAKE_TELEOP);
         }
         else if (gamepad2.dpad_down) {
             robot.liftMotor.setPower(-1);

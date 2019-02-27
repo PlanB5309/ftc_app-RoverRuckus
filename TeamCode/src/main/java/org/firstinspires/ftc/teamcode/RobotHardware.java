@@ -39,13 +39,15 @@ public class RobotHardware
     public final double RIGHT_CLAW_CLOSED = 0.7;
     public final double JOYSTICK_BLANK_VALUE = 0.05;
     public final double BUCKET_TURN_VALUE = 0.05;
-    public final double BUCKET_SCOOP_POSITION = 0.25;
-    public final double BUCKET_CARRY_POSITION = 0;
+    public final double BUCKET_SCOOP_POSITION = 0.24;
+    public final double BUCKET_CARRY_POSITION = 0.07;
     public final double BUCKET_DUMP_POSITION = 0;
     public final float DEADZONE = .15f;
     public final double RAKE_INIT = 0.68;
     public final double RAKE_TELEOP = 0.55 ;
     public final double RAKE_DOWN = 0;
+    public final double MARKER_IN = 0.07;
+    public final double MARKER_OUT = 1;
     static final double     COUNTS_PER_MOTOR_REV    = 1180 ;
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;
     static final double     WHEEL_DIAMETER_INCHES   = 3.54 ;
@@ -113,7 +115,7 @@ public class RobotHardware
         hookServo = hwMap.get(Servo.class, "hookServo");
         rakeServo = hwMap.get(Servo.class, "rakeServo");
         rakeServo.setPosition(RAKE_INIT);
-        markerServo.setPosition(0.05);
+        markerServo.setPosition(MARKER_IN);
         hookServo.setPosition(RIGHT_CLAW_CLOSED);
         bucketServo.setPosition(BUCKET_SCOOP_POSITION);
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
@@ -190,7 +192,6 @@ public class RobotHardware
         bucketServo = hwMap.get(Servo.class, "bucketServo");
         hookServo = hwMap.get(Servo.class, "hookServo");
         rakeServo = hwMap.get(Servo.class, "rakeServo");
-        markerServo.setPosition(0);
         hookServo.setPosition(RIGHT_CLAW_CLOSED);
         bucketServo.setPosition(BUCKET_SCOOP_POSITION);
         telemetry.addData("Initialization Complete: ", ":)");

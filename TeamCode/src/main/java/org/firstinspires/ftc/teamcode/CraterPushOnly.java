@@ -36,6 +36,7 @@ public class CraterPushOnly extends LinearOpMode {
         }
         else if (goldPosition == robot.LEFT) {
             drive.forward(0.5, 2);
+            drive.forward(0.5, 2);
         }
         else if (goldPosition == robot.RIGHT) {
             drive.forward(0.5, 2);

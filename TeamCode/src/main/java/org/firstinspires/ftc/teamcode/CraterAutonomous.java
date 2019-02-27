@@ -39,11 +39,11 @@ public class CraterAutonomous extends LinearOpMode {
 
             robot.extenderMotor.setPower(0.75);
             Thread.sleep(6000);
-            robot.markerServo.setPosition(1);
+            robot.markerServo.setPosition(robot.MARKER_OUT);
             robot.extenderMotor.setPower(0);
             Thread.sleep(500);
 
-            robot.markerServo.setPosition(0.05);
+            robot.markerServo.setPosition(robot.MARKER_IN);
             robot.extenderMotor.setPower(-1);
             gyroTurn.twoWheel(40, robot.LEFT);
             drive.backward(0.5, 28);
@@ -58,11 +58,11 @@ public class CraterAutonomous extends LinearOpMode {
 
             robot.extenderMotor.setPower(0.75);
             Thread.sleep(6000);
-            robot.markerServo.setPosition(1);
+            robot.markerServo.setPosition(robot.MARKER_OUT);
             robot.extenderMotor.setPower(0);
             Thread.sleep(500);
 
-            robot.markerServo.setPosition(0.05);
+            robot.markerServo.setPosition(robot.MARKER_IN);
             robot.extenderMotor.setPower(-1);
             gyroTurn.twoWheel(10, robot.LEFT);
             drive.backward(0.5, 22);
@@ -77,11 +77,11 @@ public class CraterAutonomous extends LinearOpMode {
 
             robot.extenderMotor.setPower(0.75);
             Thread.sleep(6000);
-            robot.markerServo.setPosition(1);
+            robot.markerServo.setPosition(robot.MARKER_OUT);
             robot.extenderMotor.setPower(0);
             Thread.sleep(500);
 
-            robot.markerServo.setPosition(0.05);
+            robot.markerServo.setPosition(robot.MARKER_IN);
             robot.extenderMotor.setPower(-1);
             gyroTurn.twoWheel(47, robot.LEFT);
             drive.backward(0.5, 28);

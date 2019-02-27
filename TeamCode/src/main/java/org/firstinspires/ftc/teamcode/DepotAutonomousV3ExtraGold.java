@@ -33,9 +33,9 @@ public class DepotAutonomousV3ExtraGold extends LinearOpMode {
         telemetry.update();
         drive.forward(0.4,10);
         gyroTurn.twoWheel(5, robot.RIGHT);
-        robot.markerServo.setPosition(1);
+        robot.markerServo.setPosition(robot.MARKER_OUT);
         Thread.sleep(500);
-        robot.markerServo.setPosition(0.05);
+        robot.markerServo.setPosition(robot.MARKER_IN);
         robot.extenderMotor.setPower(0);
         gyroTurn.twoWheel(5, robot.LEFT);
         Thread.sleep(500);
@@ -65,9 +65,9 @@ public class DepotAutonomousV3ExtraGold extends LinearOpMode {
             gyroTurn.twoWheel(95, robot.RIGHT);
             drive.forward(0.4, 8);
             robot.extenderMotor.setPower(0.75);
-            robot.markerServo.setPosition(1);
+            robot.markerServo.setPosition(robot.MARKER_OUT);
         } else {
-            robot.sweeperMotor.setPower(-0.5);
+            robot.sweeperMotor.setPower(0.5);
             drive.forward(0.4, 20);
             robot.sweeperMotor.setPower(0);
             Thread.sleep(1000);
@@ -77,7 +77,7 @@ public class DepotAutonomousV3ExtraGold extends LinearOpMode {
             drive.forward(0.4, 18);
             gyroTurn.twoWheel(24, robot.RIGHT);
             robot.extenderMotor.setPower(0.75);
-            robot.markerServo.setPosition(1);
+            robot.markerServo.setPosition(robot.MARKER_OUT);
         }
         while(!isStopRequested()){
 

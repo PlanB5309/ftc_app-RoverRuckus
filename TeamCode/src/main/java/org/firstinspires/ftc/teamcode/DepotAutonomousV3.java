@@ -33,9 +33,9 @@ public class DepotAutonomousV3 extends LinearOpMode {
         telemetry.update();
         drive.forward(0.4,10);
         gyroTurn.twoWheel(5, robot.RIGHT);
-        robot.markerServo.setPosition(1);
+        robot.markerServo.setPosition(robot.MARKER_OUT);
         Thread.sleep(500);
-        robot.markerServo.setPosition(0.05);
+        robot.markerServo.setPosition(robot.MARKER_IN);
         robot.extenderMotor.setPower(0);
         gyroTurn.twoWheel(5, robot.LEFT);
         Thread.sleep(500);
@@ -53,7 +53,7 @@ public class DepotAutonomousV3 extends LinearOpMode {
             drive.forward(0.4, 30);
             gyroTurn.twoWheel(40, robot.RIGHT);
             robot.extenderMotor.setPower(0.75);
-            robot.markerServo.setPosition(1);
+            robot.markerServo.setPosition(robot.MARKER_OUT);
         } else if (goldPosition == robot.RIGHT) {
             drive.backward(0.4, 4);
             gyroTurn.twoWheel(29, robot.RIGHT);
@@ -64,7 +64,7 @@ public class DepotAutonomousV3 extends LinearOpMode {
             gyroTurn.twoWheel(95, robot.RIGHT);
             drive.forward(0.4, 8);
             robot.extenderMotor.setPower(0.75);
-            robot.markerServo.setPosition(1);
+            robot.markerServo.setPosition(robot.MARKER_OUT);
         } else {
             robot.sweeperMotor.setPower(0.5);
             drive.forward(0.4, 20);
@@ -76,7 +76,7 @@ public class DepotAutonomousV3 extends LinearOpMode {
             drive.forward(0.4, 18);
             gyroTurn.twoWheel(24, robot.RIGHT);
             robot.extenderMotor.setPower(0.75);
-            robot.markerServo.setPosition(1);
+            robot.markerServo.setPosition(robot.MARKER_OUT);
         }
         while(!isStopRequested()){
 
