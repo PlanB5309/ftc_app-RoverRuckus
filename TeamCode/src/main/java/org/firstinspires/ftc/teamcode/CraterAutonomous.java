@@ -45,7 +45,7 @@ public class CraterAutonomous extends LinearOpMode {
 
             robot.markerServo.setPosition(robot.MARKER_IN);
             robot.extenderMotor.setPower(-1);
-            gyroTurn.twoWheel(40, robot.LEFT);
+            gyroTurn.twoWheel(45, robot.LEFT);
             drive.backward(0.5, 28);
             robot.extenderMotor.setPower(0);
         }
