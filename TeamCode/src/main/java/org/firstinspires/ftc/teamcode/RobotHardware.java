@@ -40,7 +40,7 @@ public class RobotHardware
     public final double JOYSTICK_BLANK_VALUE = 0.05;
     public final double BUCKET_TURN_VALUE = 0.05;
     public final double BUCKET_SCOOP_POSITION = 0.24;
-    public final double BUCKET_CARRY_POSITION = 0.07;
+    public final double BUCKET_CARRY_POSITION = 0;
     public final double BUCKET_DUMP_POSITION = 0;
     public final float DEADZONE = .15f;
     public final double RAKE_INIT = 0.68;
