@@ -20,18 +20,15 @@ public class PushGoldBlock {
 //            gyroTurn.twoWheel(25, robot.LEFT);
             robot.sweeperMotor.setPower(1);
             drive.forward(0.3, 30);
-            robot.sweeperMotor.setPower(0);
         }else if(loc == robot.RIGHT){
             drive.forward(0.5, 1);
             gyroTurn.right(20);
 //            gyroTurn.twoWheel(20, robot.RIGHT);
             robot.sweeperMotor.setPower(1);//prev. -0.5
             drive.forward(0.3, 20);
-            robot.sweeperMotor.setPower(0);
         }else if (loc == robot.CENTER) {
             robot.sweeperMotor.setPower(1);//prev. -0.5
             drive.forward(0.3, 30);
-            robot.sweeperMotor.setPower(0);
         }
     }
 //    //2240 counts per rotation

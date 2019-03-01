@@ -23,7 +23,6 @@ public class CraterAutonomous extends LinearOpMode {
         waitForStart();
         lowerRobot.run();
         openHooks.open();
-        gyroTurn.absolute(0);
         robot.bucketServo.setPosition(robot.BUCKET_SCOOP_POSITION);
 
         goldPosition = findGold.run();
@@ -33,9 +32,11 @@ public class CraterAutonomous extends LinearOpMode {
 
         if (goldPosition == robot.CENTER) {
             drive.backward(0.4, 10);
-            gyroTurn.twoWheel(85, robot.LEFT);
-            drive.forward(0.4, 32);
-            gyroTurn.twoWheel(25, robot.LEFT);
+            robot.sweeperMotor.setPower(0);
+
+            gyroTurn.twoWheel(75, robot.LEFT);//previously 85degrees
+            drive.forward(0.4, 30);
+            gyroTurn.twoWheel(32, robot.LEFT);
 
             robot.extenderMotor.setPower(0.75);
             Thread.sleep(6000);
@@ -51,6 +52,8 @@ public class CraterAutonomous extends LinearOpMode {
         }
         else if (goldPosition == robot.LEFT) {
             drive.backward(0.5, 4);
+            robot.sweeperMotor.setPower(0);
+
             gyroTurn.twoWheel(40, robot.LEFT);
             drive.forward(0.5, 14);
             gyroTurn.twoWheel(35, robot.LEFT);
@@ -69,21 +72,23 @@ public class CraterAutonomous extends LinearOpMode {
             robot.extenderMotor.setPower(0);
         }
         else if (goldPosition == robot.RIGHT) {
-            drive.backward(0.4, 10);
+            drive.backward(0.4, 6);
+            robot.sweeperMotor.setPower(0);
+
             gyroTurn.twoWheel(90, robot.LEFT);
             drive.forward(0.4, 35);
-            gyroTurn.twoWheel(30, robot.LEFT);
-            drive.forward(0.4, 3);
-
+            gyroTurn.twoWheel(40, robot.LEFT);
             robot.extenderMotor.setPower(0.75);
-            Thread.sleep(6000);
+            drive.forward(0.4, 7);
+
+            Thread.sleep(4500);
             robot.markerServo.setPosition(robot.MARKER_OUT);
             robot.extenderMotor.setPower(0);
             Thread.sleep(500);
 
             robot.markerServo.setPosition(robot.MARKER_IN);
             robot.extenderMotor.setPower(-1);
-            gyroTurn.twoWheel(47, robot.LEFT);
+            gyroTurn.twoWheel(45, robot.LEFT);
             drive.backward(0.5, 28);
             robot.extenderMotor.setPower(0);
         }

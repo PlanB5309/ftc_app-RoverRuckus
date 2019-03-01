@@ -33,13 +33,15 @@ public class CraterPushOnly extends LinearOpMode {
 
         if (goldPosition == robot.CENTER) { //Test these three if clauses
             drive.forward(0.5, 7);
+            robot.sweeperMotor.setPower(0);
         }
         else if (goldPosition == robot.LEFT) {
-            drive.forward(0.5, 2);
-            drive.forward(0.5, 2);
+            drive.forward(0.5, 4);
+            robot.sweeperMotor.setPower(0);
         }
         else if (goldPosition == robot.RIGHT) {
             drive.forward(0.5, 2);
+            robot.sweeperMotor.setPower(0);
         }
 //
         while(isStopRequested() == false){
