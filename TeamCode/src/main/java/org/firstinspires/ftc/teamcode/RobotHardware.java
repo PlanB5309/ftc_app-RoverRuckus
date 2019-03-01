@@ -192,8 +192,6 @@ public class RobotHardware
         bucketServo = hwMap.get(Servo.class, "bucketServo");
         hookServo = hwMap.get(Servo.class, "hookServo");
         rakeServo = hwMap.get(Servo.class, "rakeServo");
-        hookServo.setPosition(RIGHT_CLAW_CLOSED);
-        bucketServo.setPosition(BUCKET_SCOOP_POSITION);
         telemetry.addData("Initialization Complete: ", ":)");
         telemetry.update();
     }

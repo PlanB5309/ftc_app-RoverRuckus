@@ -18,6 +18,8 @@ public class Teleop extends OpMode {
     public void start () {
         robot.rakeServo.setPosition(robot.RAKE_TELEOP);
         robot.markerServo.setPosition(robot.MARKER_IN);
+        robot.hookServo.setPosition(robot.RIGHT_CLAW_CLOSED);
+        robot.bucketServo.setPosition(robot.BUCKET_SCOOP_POSITION);
     }
 
     float getStickValue(float joy){
